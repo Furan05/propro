@@ -40,6 +40,17 @@ class DaddyServicesController < ApplicationController
     redirect_to daddy_services_path
   end
 
+  def search
+    @daddy_services = DaddyService.where("title ILIKE ?", "%#{params[:query]}%").limit(5)
+    render json: @daddy_services.map { |service|
+      {
+        id: service.id,
+        title: service.title,
+        category: service.category.name
+      }
+    }
+  end
+
   private
 
   def daddy_service_params

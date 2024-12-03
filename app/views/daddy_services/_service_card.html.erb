@@ -1,0 +1,19 @@
+<%# app/views/daddy_services/_service_card.html.erb %>
+<div class="service-card">
+  <div class="service-header">
+    <h3><%= service.title %></h3>
+    <span class="category"><%= service.category.name.capitalize %></span>
+  </div>
+
+  <div class="service-body">
+    <p><%= service.description %></p>
+    <div class="service-price">
+      <span>Price: <%= number_to_currency(service.price) %></span>
+    </div>
+  </div>
+
+  <div class="service-footer">
+    <span class="provider">By: <%= service.user.username.capitalize %></span>
+    <%= link_to "View Details", daddy_service_path(service) %>
+  </div>
+</div>

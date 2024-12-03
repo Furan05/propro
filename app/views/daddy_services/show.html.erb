@@ -1,0 +1,299 @@
+    <header>
+        <nav>
+            <%= link_to root_path, class: "logo" do %>
+              D
+            <% end %>
+            <div class="search-bar" data-controller="search" data-search-url-value="<%= search_daddy_services_path %>">
+              <%= form_with url: search_daddy_services_path, method: :get, local: true do |f| %>
+                <%= f.text_field :query,
+                    placeholder: "What kind of Daddy you need?",
+                    data: {
+                      search_target: "input",
+                      action: "keyup->search#suggest"
+                    }
+                %>
+                <%= f.submit "Search", class: 'search-button animation-button' %>
+              <% end %>
+              <div class="search-suggestions"
+                  data-search-target="suggestions"
+                  style="display: none;">
+              </div>
+             </div>
+            <div class="account">
+                <img src="avatar.jpg" alt="Profile">
+                <button>Account</button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="service-card">
+        <div class="images-container">
+            <div class="main-image">
+                <img src="batman-main.jpg" alt="Batman silhouette">
+            </div>
+            <div class="secondary-images">
+                <img src="batman-street.jpg" alt="Batman street">
+                <img src="batman-smoke.jpg" alt="Batman smoke">
+            </div>
+        </div>
+
+        <div class="service-info">
+            <h1>Daddy <%= @daddy_service.category.name.capitalize %> : <%= @daddy_service.user.username %></h1>
+            <div class="rating">
+                <span class="stars">⭐ 4.8</span>
+                <span class="reviews">(160)</span>
+                <span class="duration">1.7 hours</span>
+            </div>
+            <p class="description"><%= @daddy_service.description %></p>
+        </div>
+
+        <aside class="pricing-card">
+            <h2><%= @daddy_service.title %></h2>
+            <div class="price"><%= @daddy_service.price %> $ par jour</div>
+            <p class="highlight">Le Self Defense comme vous ne l'avez jamais vu.</p>
+            <p>Combat les méchants la nuit.</p>
+            <button class="book-button">Book this Daddy</button>
+        </aside>
+    </main>
+
+</body>
+</html>
+
+<style>
+  :root {
+      --primary-color: #E67E22;
+      --text-color: #333;
+      --background-color: #fff;
+  }
+
+  body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: var(--text-color);
+  }
+
+  header {
+      padding: 1rem;
+      background: var(--background-color);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+  }
+
+  .logo {
+      background: var(--primary-color);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+  }
+
+  .search-bar {
+      flex-grow: 1;
+      margin: 0 2rem;
+    position: relative;
+  }
+
+  .search-bar input[type="text"] {
+      width: 80%;
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+  }
+
+  .search-button {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+  }
+
+   .search-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(230, 126, 34, 0.3);
+      background: #d35400;
+  }
+
+  .search-button:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 8px rgba(230, 126, 34, 0.3);
+  }
+
+  .search-button::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: -100%;
+      background: linear-gradient(
+          120deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+      );
+      transition: 0.5s;
+  }
+
+  .search-button:hover::after {
+      left: 100%;
+  }
+
+  .service-card {
+      max-width: 1200px;
+      margin: 2rem auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+      padding: 0 1rem;
+  }
+
+  .images-container {
+      grid-column: 1 / 2;
+  }
+
+  .main-image img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 8px;
+  }
+
+  .secondary-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1rem;
+  }
+
+  .secondary-images img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+  }
+
+  .pricing-card {
+      background: #faf9f8;
+      padding: 2rem;
+      border-radius: 8px;
+      position: sticky;
+      top: 2rem;
+  }
+
+  .price {
+      font-size: 2rem;
+      font-weight: bold;
+      margin: 1rem 0;
+  }
+
+  .book-button {
+      /* Garder les styles existants */
+      width: 100%;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 1rem;
+      border-radius: 4px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      margin-top: 2rem;
+
+      /* Ajout des animations */
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+  }
+
+  .book-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(230, 126, 34, 0.3);
+      background: #d35400;
+  }
+
+  .book-button:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 8px rgba(230, 126, 34, 0.3);
+  }
+
+  .book-button::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: -100%;
+      background: linear-gradient(
+          120deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+      );
+      transition: 0.5s;
+  }
+
+  .book-button:hover::after {
+      left: 100%;
+  }
+
+    .rating {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin: 1rem 0;
+    }
+  .search-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    margin-top: 4px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+
+  .suggestion-item {
+    display: block;
+    padding: 12px 16px;
+    color: #2563eb;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+  }
+
+  .suggestion-item:hover {
+    background-color: #f8f9fa;
+  }
+
+  .search-suggestions a {
+    display: block;
+    padding: 0.8rem 1rem;
+    color: var(--text-color);
+    text-decoration: none;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s ease;
+  }
+
+  .search-suggestions a:last-child {
+    border-bottom: none;
+  }
+
+  .search-suggestions a:hover {
+    background-color: #f8f9fa;
+    color: var(--primary-color);
+  }
+</style>
