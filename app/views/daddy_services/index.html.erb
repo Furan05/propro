@@ -1,0 +1,32 @@
+<h1>Services</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Category</th>
+      <th>User</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @services.each do |service| %>
+      <tr>
+        <td><%= service.title %></td>
+        <td><%= service.description %></td>
+        <td><%= number_to_currency(service.price) %></td>
+        <td><%= service.category.name %></td>
+        <td><%= service.user.username %></td>
+        <td>
+          <%= link_to 'Show', service_path(service) %>
+          <%= link_to 'Edit', edit_service_path(service) %>
+          <%= link_to 'Delete', service_path(service), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New Service', new_service_path %>
