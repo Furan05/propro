@@ -1,0 +1,213 @@
+    <header>
+        <nav>
+            <div class="logo">D</div>
+            <div class="search-bar">
+                <input type="text" placeholder="What kind off Daddy you need ?">
+                <button>Search</button>
+            </div>
+            <div class="account">
+                <img src="avatar.jpg" alt="Profile">
+                <button>Account</button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="service-card">
+        <div class="images-container">
+            <div class="main-image">
+                <img src="batman-main.jpg" alt="Batman silhouette">
+            </div>
+            <div class="secondary-images">
+                <img src="batman-street.jpg" alt="Batman street">
+                <img src="batman-smoke.jpg" alt="Batman smoke">
+            </div>
+        </div>
+
+        <div class="service-info">
+            <h1>Daddy <%= @daddy_service.category.name.capitalize %> : <%= @daddy_service.user.username %></h1>
+            <div class="rating">
+                <span class="stars">⭐ 4.8</span>
+                <span class="reviews">(160)</span>
+                <span class="duration">1.7 hours</span>
+            </div>
+            <p class="description"><%= @daddy_service.description %></p>
+        </div>
+
+        <aside class="pricing-card">
+            <h2><%= @daddy_service.title %></h2>
+            <div class="price"><%= @daddy_service.price %> $ par jour</div>
+            <p class="highlight">Le Self Defense comme vous ne l'avez jamais vu.</p>
+            <p>Combat les méchants la nuit.</p>
+            <button class="book-button">Book this Daddy</button>
+        </aside>
+    </main>
+
+</body>
+</html>
+
+<style>
+  :root {
+      --primary-color: #E67E22;
+      --text-color: #333;
+      --background-color: #fff;
+  }
+
+  body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: var(--text-color);
+  }
+
+  header {
+      padding: 1rem;
+      background: var(--background-color);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+  }
+
+  .logo {
+      background: var(--primary-color);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+  }
+
+  .search-bar {
+      flex-grow: 1;
+      margin: 0 2rem;
+  }
+
+  .search-bar input {
+      width: 80%;
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+  }
+
+  .search-bar button {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+  }
+
+  .service-card {
+      max-width: 1200px;
+      margin: 2rem auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+      padding: 0 1rem;
+  }
+
+  .images-container {
+      grid-column: 1 / 2;
+  }
+
+  .main-image img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 8px;
+  }
+
+  .secondary-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1rem;
+  }
+
+  .secondary-images img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+  }
+
+  .pricing-card {
+      background: #faf9f8;
+      padding: 2rem;
+      border-radius: 8px;
+      position: sticky;
+      top: 2rem;
+  }
+
+  .price {
+      font-size: 2rem;
+      font-weight: bold;
+      margin: 1rem 0;
+  }
+
+.book-button {
+    /* Garder les styles existants */
+    width: 100%;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-top: 2rem;
+
+    /* Ajout des animations */
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.book-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(230, 126, 34, 0.3);
+    background: #d35400;
+}
+
+.book-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(230, 126, 34, 0.3);
+}
+
+.book-button::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: -100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.book-button:hover::after {
+    left: 100%;
+}
+
+  .rating {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1rem 0;
+  }
+
+
+</style>
