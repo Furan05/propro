@@ -10,12 +10,12 @@ Rails.application.routes.draw do
 
   # Routes pour les catégories
   resources :categories do
-    resources :daddy_services, only: [:index, :new, :create]
+    resources :daddy_services, only: [:new, :create]
     member do
       patch 'associate_service', to: 'categories#update'
     end
   end
 
   # Routes pour les DaddyServices
-  resources :daddy_services, only: [:show, :edit, :update, :destroy]
+  resources :daddy_services, only: [:index ,:show, :edit, :update, :destroy]
 end
