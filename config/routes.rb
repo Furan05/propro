@@ -13,6 +13,9 @@ Rails.application.routes.draw do
 
   # Routes pour les DaddyServices
   resources :daddy_services do
+    collection do
+      get :search
+    end
     member do
       patch 'associate_service', to: 'categories#update'
     end
