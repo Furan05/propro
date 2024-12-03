@@ -13,6 +13,7 @@ class DaddyServicesController < ApplicationController
 
   def create
     @daddy_service = DaddyService.new(daddy_service_params)
+    @daddy_service.user = current_user
     if @daddy_service.save
       redirect_to daddy_services_path
     else
@@ -42,6 +43,6 @@ class DaddyServicesController < ApplicationController
   private
 
   def daddy_service_params
-    params.require(:daddy_service).permit(:name, :description, :price)
+    params.require(:daddy_service).permit(:title, :description, :price, :category_id)
   end
 end
