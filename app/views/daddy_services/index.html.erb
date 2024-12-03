@@ -1,0 +1,30 @@
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Category</th>
+      <th>User</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @daddy_services.each do |daddy_service| %>
+      <tr>
+        <td><%= daddy_service.title %></td>
+        <td><%= daddy_service.description %></td>
+        <td><%= number_to_currency(daddy_service.price) %></td>
+        <td><%= daddy_service.category.name %></td>
+        <td><%= daddy_service.user.username %></td>
+        <td>
+          <%= link_to 'Show', daddy_service_path(daddy_service) %>
+          <%= link_to 'Edit', edit_daddy_service_path(daddy_service) %>
+          <%= link_to 'Delete', daddy_service_path(daddy_service), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%# <%= link_to 'New Service', new_daddy_service_path %>
