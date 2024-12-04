@@ -1,4 +1,15 @@
 <style>
+    :root {
+      --primary-color: #E67E22;
+      --text-color: #333;
+      --background-color: #fff;
+  }
+
+  body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: var(--text-color);
+  }
   .promo-banner {
     background: black;
     color: white;
@@ -16,28 +27,6 @@
   .logo img {
     width: 50px;
     height: 50px;
-  }
-
-  .search-bar {
-    flex: 1;
-    display: flex;
-    gap: 10px;
-  }
-
-  .search-bar input {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-
-  .search-button, .account-button {
-    background: #FF6B2B;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
   }
 
   .categories-nav {
@@ -131,53 +120,8 @@
     cursor: pointer;
   }
 
-  footer {
-    background: #f9f9f9;
-    padding: 40px 20px;
-  }
-
-  .footer-content {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 40px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .footer-section h4 {
-    margin-bottom: 20px;
-  }
-
-  .footer-section ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  .footer-section li {
-    margin-bottom: 10px;
-  }
-
-  .copyright {
-    text-align: center;
-    padding: 20px;
-    border-top: 1px solid #ddd;
-  }
 </style>
-
-<div class="promo-banner">
-  Code promo -50% avec le code SugarDaddy
-</div>
-
-<header class="main-header">
-  <div class="logo">
-    <img src="https://placehold.co/50x50/orange/white?text=DL" alt="Daddy Logo">
-  </div>
-  <div class="search-bar">
-    <input type="text" placeholder="What kind off Daddy you need ?">
-    <button class="search-button">Search</button>
-  </div>
-  <button class="account-button">Account</button>
-</header>
+<%= render 'componants/searchbar' %>
 
 <nav class="categories-nav">
   <ul>
