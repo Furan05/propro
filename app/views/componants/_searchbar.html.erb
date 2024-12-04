@@ -1,7 +1,7 @@
 <header>
         <nav>
-            <%= link_to root_path, class: "logo" do %>
-              D
+            <%= link_to daddy_services_path do %>
+              <%= image_tag "logo_daddy.png", alt: "Logo", class: "logo" %>
             <% end %>
             <div class="search-bar" data-controller="search" data-search-url-value="<%= search_daddy_services_path %>">
               <%= form_with url: search_daddy_services_path, method: :get, local: true do |f| %>

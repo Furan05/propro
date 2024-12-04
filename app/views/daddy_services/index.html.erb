@@ -138,8 +138,8 @@
   .view-all-button {
     display: inline-block;
     padding: 10px 30px;
-    border: 2px solid #FF6B2B;
-    color: #FF6B2B;
+    border: 2px solid #E67E22;
+    color: #E67E22;
     background: transparent;
     border-radius: 4px;
     cursor: pointer;
@@ -147,9 +147,25 @@
   }
 
   .view-all-button:hover {
-    background: #FF6B2B;
+    background: #E67E22;
     color: white;
   }
+  .view-more {
+  background: transparent;
+  border: 1px solid #E67E22;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: #E67E22;
+}
+
+.view-more:hover {
+  background: #E67E22;
+  border-color: white;
+  color: white;
+}
 
 </style>
 <%= render 'componants/searchbar' %>
@@ -164,6 +180,7 @@
     <li>Entretien</li>
     <li>Pool Cleaner</li>
     <li>Daddy Loyalty Program</li>
+    <li><%= link_to 'New_Daddy_service', new_daddy_service_path, class: "view-more" %></li>
   </ul>
 </nav>
 

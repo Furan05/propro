@@ -88,130 +88,183 @@
 </html>
 <script>
   // Sélection des éléments
-const bookButton = document.getElementById('book-button');
-const modal = document.getElementById('booking-modal');
-const closeButton = document.querySelector('.close');
-const bookingForm = document.getElementById('booking-form');
+  const bookButton = document.getElementById('book-button');
+  const modal = document.getElementById('booking-modal');
+  const closeButton = document.querySelector('.close');
+  const bookingForm = document.getElementById('booking-form');
 
-// Ouvrir le modal
-bookButton.addEventListener('click', () => {
-  modal.style.display = 'block';
-  // Petit délai pour permettre l'animation
-  setTimeout(() => {
-    modal.classList.add('active');
-  }, 10);
-});
+  // Ouvrir le modal
+  bookButton.addEventListener('click', () => {
+    modal.style.display = 'block';
+    // Petit délai pour permettre l'animation
+    setTimeout(() => {
+      modal.classList.add('active');
+    }, 10);
+  });
 
-// Fermer le modal
-function closeModal() {
-  modal.classList.remove('active');
-  setTimeout(() => {
-    modal.style.display = 'none';
-  }, 300); // Attendre la fin de l'animation
-}
-
-closeButton.addEventListener('click', closeModal);
-
-// Fermer le modal en cliquant en dehors
-window.addEventListener('click', (e) => {
-  if (e.target === modal) {
-    closeModal();
+  // Fermer le modal
+  function closeModal() {
+    modal.classList.remove('active');
+    setTimeout(() => {
+      modal.style.display = 'none';
+    }, 300); // Attendre la fin de l'animation
   }
-});
 
+  closeButton.addEventListener('click', closeModal);
 
-
-// Dans votre fichier JavaScript existant
-document.addEventListener('DOMContentLoaded', function() {
-  const dateInput = document.querySelector('.date-picker');
-  const timeSlots = document.querySelectorAll('.time-slot');
-  const timeInput = document.querySelector('#appointment_time');
-
-  timeSlots.forEach(slot => {
-    slot.addEventListener('click', function(e) {
-      e.preventDefault();
-      if (this.classList.contains('booked')) return;
-
-      // Retire la sélection précédente
-      timeSlots.forEach(s => s.classList.remove('selected'));
-
-      // Sélectionne le nouveau créneau
-      this.classList.add('selected');
-
-      // Met à jour l'input hidden
-      timeInput.value = this.dataset.time;
-    });
-  });
-
-
-  // Mise à jour des créneaux disponibles quand la date change
-  dateInput.addEventListener('change', function() {
-    // Ici vous pouvez faire un appel AJAX pour récupérer les créneaux disponibles
-    // pour la date sélectionnée et mettre à jour l'affichage
-    fetch(`/daddy_services/${daddyServiceId}/available_slots?date=${this.value}`)
-      .then(response => response.json())
-      .then(data => {
-        updateAvailableSlots(data.available_slots);
-      });
-  });
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-  const dateInput = document.querySelector('.date-picker');
-  const timeSlots = document.querySelectorAll('.time-slot');
-  const timeInput = document.querySelector('#appointment_time');
-  const daddyServiceId = window.location.pathname.split('/')[2]; // Récupère l'ID depuis l'URL
-
-  // Fonction pour mettre à jour les créneaux disponibles
-  async function updateAvailableSlots(date) {
-    try {
-      const response = await fetch(`/daddy_services/${daddyServiceId}/available_slots?date=${date}`);
-      const data = await response.json();
-
-      timeSlots.forEach(slot => {
-        const time = slot.dataset.time;
-        if (data.available_slots.includes(time)) {
-          slot.classList.remove('booked');
-          slot.disabled = false;
-        } else {
-          slot.classList.add('booked');
-          slot.disabled = true;
-        }
-      });
-    } catch (error) {
-      console.error('Erreur lors de la mise à jour des créneaux:', error);
+  // Fermer le modal en cliquant en dehors
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal();
     }
-  }
-
-  // Écouteur d'événement pour le changement de date
-  dateInput.addEventListener('change', function() {
-    updateAvailableSlots(this.value);
-    // Réinitialiser la sélection de l'heure
-    timeSlots.forEach(s => s.classList.remove('selected'));
-    timeInput.value = '';
   });
 
-  // Gestion des clics sur les créneaux horaires
-  timeSlots.forEach(slot => {
-    slot.addEventListener('click', function(e) {
-      e.preventDefault();
-      if (this.classList.contains('booked')) return;
 
-      timeSlots.forEach(s => s.classList.remove('selected'));
-      this.classList.add('selected');
-      timeInput.value = this.dataset.time;
+
+  // Dans votre fichier JavaScript existant
+  document.addEventListener('DOMContentLoaded', function() {
+    const dateInput = document.querySelector('.date-picker');
+    const timeSlots = document.querySelectorAll('.time-slot');
+    const timeInput = document.querySelector('#appointment_time');
+
+    timeSlots.forEach(slot => {
+      slot.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (this.classList.contains('booked')) return;
+
+        // Retire la sélection précédente
+        timeSlots.forEach(s => s.classList.remove('selected'));
+
+        // Sélectionne le nouveau créneau
+        this.classList.add('selected');
+
+        // Met à jour l'input hidden
+        timeInput.value = this.dataset.time;
+      });
+    });
+
+
+    // Mise à jour des créneaux disponibles quand la date change
+    dateInput.addEventListener('change', function() {
+      // Ici vous pouvez faire un appel AJAX pour récupérer les créneaux disponibles
+      // pour la date sélectionnée et mettre à jour l'affichage
+      fetch(`/daddy_services/${daddyServiceId}/available_slots?date=${this.value}`)
+        .then(response => response.json())
+        .then(data => {
+          updateAvailableSlots(data.available_slots);
+        });
     });
   });
 
-  // Charger les créneaux disponibles pour la date initiale
-  if (dateInput.value) {
-    updateAvailableSlots(dateInput.value);
-  }
-});
+  document.addEventListener('DOMContentLoaded', function() {
+    const dateInput = document.querySelector('.date-picker');
+    const timeSlots = document.querySelectorAll('.time-slot');
+    const timeInput = document.querySelector('#appointment_time');
+    const daddyServiceId = window.location.pathname.split('/')[2]; // Récupère l'ID depuis l'URL
+
+    // Fonction pour mettre à jour les créneaux disponibles
+    async function updateAvailableSlots(date) {
+      try {
+        const response = await fetch(`/daddy_services/${daddyServiceId}/available_slots?date=${date}`);
+        const data = await response.json();
+
+        timeSlots.forEach(slot => {
+          const time = slot.dataset.time;
+          if (data.available_slots.includes(time)) {
+            slot.classList.remove('booked');
+            slot.disabled = false;
+          } else {
+            slot.classList.add('booked');
+            slot.disabled = true;
+          }
+        });
+      } catch (error) {
+        console.error('Erreur lors de la mise à jour des créneaux:', error);
+      }
+    }
+
+    // Écouteur d'événement pour le changement de date
+    dateInput.addEventListener('change', function() {
+      updateAvailableSlots(this.value);
+      // Réinitialiser la sélection de l'heure
+      timeSlots.forEach(s => s.classList.remove('selected'));
+      timeInput.value = '';
+    });
+
+    // Gestion des clics sur les créneaux horaires
+    timeSlots.forEach(slot => {
+      slot.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (this.classList.contains('booked')) return;
+
+        timeSlots.forEach(s => s.classList.remove('selected'));
+        this.classList.add('selected');
+        timeInput.value = this.dataset.time;
+      });
+    });
+
+    // Charger les créneaux disponibles pour la date initiale
+    if (dateInput.value) {
+      updateAvailableSlots(dateInput.value);
+    }
+  });
 
 </script>
 <style>
-    :root {
+  .booking-steps {
+    margin-bottom: 20px;
+  }
+
+  .date-selection {
+    margin-bottom: 20px;
+  }
+
+  .time-slots {
+    margin-bottom: 20px;
+  }
+
+  .slots-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .time-slot {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .time-slot:hover:not(.booked) {
+    background: #e67e22;
+    color: white;
+  }
+
+  .time-slot.selected {
+    background: #e67e22;
+    color: white;
+    border-color: #e67e22;
+  }
+
+  .time-slot.booked {
+    background: #f5f5f5;
+    color: #999;
+    cursor: not-allowed;
+    text-decoration: line-through;
+  }
+
+  .date-picker {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+  :root {
       --primary-color: #E67E22;
       --text-color: #333;
       --background-color: #fff;
@@ -222,6 +275,86 @@ document.addEventListener('DOMContentLoaded', function() {
       font-family: Arial, sans-serif;
       color: var(--text-color);
   }
+
+  header {
+      padding: 1rem;
+      background: var(--background-color);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+  }
+
+  .logo {
+      background: var(--primary-color);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+  }
+
+  .search-bar {
+      flex-grow: 1;
+      margin: 0 2rem;
+    position: relative;
+  }
+
+  .search-bar input[type="text"] {
+      width: 80%;
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+  }
+
+  .search-button {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+  }
+
+   .search-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(230, 126, 34, 0.3);
+      background: #d35400;
+  }
+
+  .search-button:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 8px rgba(230, 126, 34, 0.3);
+  }
+
+  .search-button::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: -100%;
+      background: linear-gradient(
+          120deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+      );
+      transition: 0.5s;
+  }
+
+  .search-button:hover::after {
+      left: 100%;
+  }
+
   .service-card {
       max-width: 1200px;
       margin: 2rem auto;
@@ -325,6 +458,17 @@ document.addEventListener('DOMContentLoaded', function() {
         gap: 1rem;
         margin: 1rem 0;
     }
+  .search-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    margin-top: 4px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
 
   .suggestion-item {
     display: block;
@@ -362,7 +506,7 @@ document.addEventListener('DOMContentLoaded', function() {
   /* Styles pour le bouton principal */
 .book-button {
   padding: 12px 24px;
-  background: #007bff;
+  background: var(--primary-color);
   color: white;
   border: none;
   border-radius: 8px;
@@ -372,7 +516,7 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 
 .book-button:hover {
-  background: #0056b3;
+  background: #d35400;
   transform: translateY(-2px);
 }
 
@@ -455,7 +599,7 @@ input[type="datetime-local"]:focus {
 .submit-button {
   width: 100%;
   padding: 12px;
-  background: #007bff;
+  background: var(--primary-color);
   color: white;
   border: none;
   border-radius: 8px;
@@ -465,7 +609,7 @@ input[type="datetime-local"]:focus {
 }
 
 .submit-button:hover {
-  background: #0056b3;
+  background: #d35400;
   transform: translateY(-2px);
 }
 </style>
