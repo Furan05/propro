@@ -12,14 +12,16 @@
         </div>
 
         <div class="service-info">
-            <h1>Daddy <%= @daddy_service.category.name.capitalize %> : <%= @daddy_service.user.username %></h1>
-            <div class="rating">
-                <span class="stars">⭐ 4.8</span>
-                <span class="reviews">(160)</span>
-                <span class="duration">1.7 hours</span>
-            </div>
-            <p class="description"><%= @daddy_service.description %></p>
-        </div>
+          <h1>Daddy <%= @daddy_service.category.name.capitalize %> :
+            <%= link_to @daddy_service.user.username, user_path(@daddy_service.user), class: "username-link" %>
+        </h1>
+          <div class="rating">
+              <span class="stars">⭐ 4.8</span>
+              <span class="reviews">(160)</span>
+              <span class="duration">1.7 hours</span>
+          </div>
+          <p class="description"><%= @daddy_service.description %></p>
+      </div>
 
         <aside class="pricing-card">
             <h2><%= @daddy_service.title %></h2>

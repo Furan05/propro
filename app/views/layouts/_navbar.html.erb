@@ -3,5 +3,7 @@
     <li><%= link_to 'Home', root_path %></li>
     <li><%= link_to 'Daddy_service', daddy_services_path %></li>
     <li><%= link_to 'New_Daddy_service', new_daddy_service_path %></li>
+    <li><%= link_to "Mon Profil", profile_path, class: "nav-link" %></li>
+    <li><%= link_to "Log_out", destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-link" %></li>
   </ul>
 </nav>
