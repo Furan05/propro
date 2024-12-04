@@ -6,6 +6,11 @@
     <title>Find Your Daddy - Sur Demande</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
+       :root {
+      --primary-color: #E67E22;
+      --text-color: #333;
+      --background-color: #fff;
+        }
         * {
             margin: 0;
             padding: 0;
@@ -109,23 +114,168 @@
             color: #e27730;
             margin: 10px 0;
         }
+        .search-bar {
+            flex-grow: 1;
+            margin: 0 2rem;
+          position: relative;
+          margin-bottom: 10px;
+          display: flex;
+          align-items: center;
+          gap: 15px;
+        }
+        .search-form {
+          display: flex;
+          flex: 1;
+          gap: 10px;
+        }
 
+        .view-all {
+          white-space: nowrap;
+        }
+          .search-bar input[type="text"] {
+              width: 80%;
+              padding: 0.8rem;
+              border: 1px solid #ddd;
+              border-radius: 4px;
+          }
 
+          .search-button {
+              background: var(--primary-color);
+              color: white;
+              border: none;
+              padding: 0.8rem 1.5rem;
+              border-radius: 4px;
+              cursor: pointer;
+          }
+
+          .search-button:hover {
+              transform: translateY(-2px);
+              box-shadow: 0 5px 15px rgba(230, 126, 34, 0.3);
+              background: #d35400;
+          }
+
+          .search-button:active {
+              transform: translateY(0);
+              box-shadow: 0 2px 8px rgba(230, 126, 34, 0.3);
+          }
+
+          .search-button::after {
+              content: '';
+              position: absolute;
+              width: 100%;
+              height: 100%;
+              top: 0;
+              left: -100%;
+              background: linear-gradient(
+                  120deg,
+                  transparent,
+                  rgba(255, 255, 255, 0.2),
+                  transparent
+              );
+              transition: 0.5s;
+          }
+
+          .search-button:hover::after {
+              left:
+          }
+
+          .btn:hover {
+              transform: translateY(-2px);
+              box-shadow: 0 5px 15px rgba(230, 126, 34, 0.3);
+              background: #d35400;
+          }
+
+          .btn:active {
+              transform: translateY(0);
+              box-shadow: 0 2px 8px rgba(230, 126, 34, 0.3);
+          }
+
+          .search-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            margin-top: 4px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+          }
+
+          .suggestion-item {
+            display: block;
+            padding: 12px 16px;
+            color: #2563eb;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background-color 0.2s ease;
+          }
+
+          .suggestion-item:hover {
+            background-color: #f8f9fa;
+          }
+
+          .search-suggestions a {
+            display: block;
+            padding: 0.8rem 1rem;
+            color: var(--text-color);
+            text-decoration: none;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.2s ease;
+          }
+
+          .search-suggestions a:last-child {
+            border-bottom: none;
+          }
+
+          .search-suggestions a:hover {
+            background-color: #f8f9fa;
+            color: var(--primary-color);
+          }
+        .top-right {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+          }
+
+          .sign-in {
+              color: white;
+              text-decoration: none;
+              font-size: 14px;
+              padding: 8px 15px;
+              border-radius: 5px;
+              background-color: rgba(255, 255, 255, 0.1);
+          }
     </style>
 </head>
 <body>
     <div class="header">
+      <div class="top-right">
+        <%= link_to "Sign in / Join", user_session_path, class: "sign-in"  %>
+      </div>
         <div class="search-container">
           <div class="logo">
               <img width="100" src="https://lannetech.com/client/admin/img/674f2a533026b.png" class="logo-icon">
               <h1>Find Your Daddy.<br>Sur Demande.</h1>
           </div>
           <p>Professional courses, led by the world’s top Daddy.</p>
-            <div class="search-box">
-                <input type="text" placeholder="What kind off Daddy you need ?">
-                <button class="btn">Search</button>
-                <button class="btn">View All Daddy</button>
-            </div>
+            <div class="search-bar" data-controller="search" data-search-url-value="<%= search_daddy_services_path %>">
+              <%= form_with url: search_daddy_services_path, method: :get, local: true, class: 'search-form' do |f| %>
+                <%= f.text_field :query,
+                    placeholder: "What kind of Daddy you need?",
+                    data: {
+                      search_target: "input",
+                      action: "keyup->search#suggest"
+                    }
+                %>
+                <%= f.submit "Search", class: 'search-button animation-button' %>
+                <%= link_to "View all Daddys", daddy_services_path, class: 'btn animation-button' %>
+              <% end %>
+              <div class="search-suggestions"
+                  data-search-target="suggestions"
+                  style="display: none;">
+              </div>
+             </div>
             <div class="tags">
                 <span class="tag">Popular:</span>
                 <span class="tag">Informaticien</span>
