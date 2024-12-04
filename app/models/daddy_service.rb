@@ -4,6 +4,22 @@ class DaddyService < ApplicationRecord
   has_many :appointments
   has_many :users, through: :appointments
 
+  after_create :update_user_pro_status
+  after_destroy :check_user_pro_status
+
+  private
+
+  def update_user_pro_status
+    user.update(role: true) unless user.role
+  end
+
+  def check_user_pro_status
+    # Si c'était le dernier service, passe pro à false
+    if user.daddy_services.count == 0
+      user.update(role: false)
+    end
+  end
+
 
   def self.search_by_title_and_category(query)
     where("title ILIKE ? OR categories.name ILIKE ?", "%#{query}%", "%#{query}%")

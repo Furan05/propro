@@ -5,8 +5,7 @@ Rails.application.routes.draw do
   # Route pour vérifier la santé de l'application
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Routes pour les utilisateurs
-  resources :users, only: [:index, :show]
+  get 'profile', to: 'users#profile'
 
   # Routes pour les catégories
   resources :categories

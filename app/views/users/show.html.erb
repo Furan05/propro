@@ -1,0 +1,194 @@
+<!-- app/views/users/show.html.erb -->
+<div class="public-profile-container">
+  <div class="profile-header">
+    <div class="profile-info">
+      <h1><%= @user.username %> <%= "(Pro)" if @user.role %></h1>
+    </div>
+  </div>
+
+  <% if @user.role %>
+    <div class="services-section">
+      <h2>Services proposés</h2>
+      <% if @services.any? %>
+        <div class="services-grid">
+          <% @services.each do |service| %>
+            <div class="service-card">
+              <h3><%= service.title %></h3>
+              <p class="price"><%= service.price %>€/jour</p>
+              <p class="category"><%= service.category.name %></p>
+              <p class="description"><%= truncate(service.description, length: 100) %></p>
+              <%= link_to "Réserver", daddy_service_path(service), class: "book-button" %>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <p class="no-services">Aucun service disponible pour le moment.</p>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="not-pro-message">
+      <p>Ce profil n'est pas un compte professionnel.</p>
+    </div>
+  <% end %>
+</div>
+
+
+<style>
+  .profile-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .profile-header {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .profile-info h1 {
+    color: #333;
+    margin-bottom: 1rem;
+  }
+
+  .user-details {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .user-details p {
+    color: #666;
+    font-size: 1.1rem;
+  }
+
+  .appointments-section {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .appointments-section h2 {
+    color: #333;
+    margin-bottom: 1.5rem;
+  }
+
+  .appointments-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .appointment-card {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: transform 0.2s ease;
+  }
+
+  .appointment-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .appointment-card h3 {
+    color: #e67e22;
+    margin-bottom: 1rem;
+  }
+
+  .appointment-details {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .appointment-details p {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #666;
+  }
+
+  .appointment-details i {
+    color: #e67e22;
+    width: 20px;
+  }
+
+  .no-appointments {
+    text-align: center;
+    color: #666;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+  }
+
+
+  /* Styles pour les cartes de service */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.service-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+}
+
+.service-card h3 {
+  color: #e67e22;
+  margin-bottom: 1rem;
+}
+
+.price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #2ecc71;
+}
+
+.category {
+  color: #666;
+  margin: 0.5rem 0;
+}
+
+.view-button, .book-button, .create-button {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  background: #e67e22;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  margin-top: 1rem;
+  transition: background 0.3s ease;
+}
+
+.view-button:hover, .book-button:hover, .create-button:hover {
+  background: #d35400;
+}
+
+.not-pro-message {
+  text-align: center;
+  padding: 2rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin-top: 2rem;
+}
+
+/* Sections spécifiques au profil pro */
+.services-section {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+</style>
