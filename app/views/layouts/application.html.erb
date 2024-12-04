@@ -12,7 +12,6 @@
   </head>
 
   <body data-daddy-service-id="<%= @daddy_service&.id %>">
-    <%= render "layouts/navbar"%>
     <%= yield %>
     <%= render 'layouts/footer' %>
     <%= javascript_include_tag "controllers/search_controller" %>
