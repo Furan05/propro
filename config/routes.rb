@@ -6,8 +6,6 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Routes pour les utilisateurs
-  resources :users, only: [:index, :show]
-
   # Routes pour les catégories
   resources :categories
 
