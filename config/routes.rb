@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :categories
 
   resources :users
+  get '/profile', to: 'users#profile', as: :profile
 
 
   # Routes pour les DaddyServices
@@ -22,6 +23,7 @@ Rails.application.routes.draw do
       get :search
     end
     resources :appointments, only: [:create]
+    resources :categories, only: [:show]
   end
 
   # Routes pour les rendez-vous

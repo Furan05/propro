@@ -1,47 +1,42 @@
 <%= render 'componants/searchbar' %>
-
-    <main class="service-card">
-        <div class="images-container">
-            <div class="main-image">
-                <img src="batman-main.jpg" alt="Batman silhouette">
-            </div>
-            <div class="secondary-images">
-                <img src="batman-street.jpg" alt="Batman street">
-                <img src="batman-smoke.jpg" alt="Batman smoke">
-            </div>
-        </div>
-
-        <div class="service-info">
-          <h1>Daddy <%= @daddy_service.category.name.capitalize %> :
-            <%= link_to @daddy_service.user.username, user_path(@daddy_service.user), class: "username-link" %>
-        </h1>
-          <div class="rating">
-              <span class="stars">⭐ 4.8</span>
-              <span class="reviews">(160)</span>
-              <span class="duration">1.7 hours</span>
-          </div>
-          <p class="description"><%= @daddy_service.description %></p>
-      </div>
-
-        <aside class="pricing-card">
-            <h2><%= @daddy_service.title %></h2>
-            <div class="price"><%= @daddy_service.price %> $ par jour</div>
-            <p class="highlight">Le Self Defense comme vous ne l'avez jamais vu.</p>
-            <p>Combat les méchants la nuit.</p>
-            <!-- Le bouton qui ouvre le modal -->
-            <button id="book-button" class="book-button">Prendre rendez-vous</button>
-
-            <!-- Le modal -->
-            <div id="booking-modal" class="modal">
-              <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Réserver votre rendez-vous</h2>
-
-                <%= simple_form_for [@daddy_service, Appointment.new] do |f| %>
-                  <div class="booking-steps">
-                    <!-- Étape 1: Sélection de la date -->
-                    <div class="date-selection">
-                      <%= f.input :date,
+<main class="service-card">
+  <div class="images-container">
+    <div class="main-image">
+      <img src="batman-main.jpg" alt="Batman silhouette">
+    </div>
+    <div class="secondary-images">
+      <img src="batman-street.jpg" alt="Batman street">
+      <img src="batman-smoke.jpg" alt="Batman smoke">
+    </div>
+  </div>
+  <div class="service-info">
+    <h1>Daddy <%= @daddy_service.category.name.capitalize %> :
+      <%= @daddy_service.user.username %>
+    </h1>
+    <div class="rating">
+      <span class="stars">⭐ 4.8</span>
+      <span class="reviews">(160)</span>
+      <span class="duration">1.7 hours</span>
+    </div>
+    <p class="description"><%= @daddy_service.description %></p>
+  </div>
+  <aside class="pricing-card">
+    <h2><%= @daddy_service.title %></h2>
+    <div class="price"><%= @daddy_service.price %> $ par jour</div>
+    <p class="highlight">Le Self Defense comme vous ne l'avez jamais vu.</p>
+    <p>Combat les méchants la nuit.</p>
+    <!-- Le bouton qui ouvre le modal -->
+    <button id="book-button" class="book-button">Prendre rendez-vous</button>
+    <!-- Le modal -->
+    <div id="booking-modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Réserver votre rendez-vous</h2>
+        <%= simple_form_for [@daddy_service, Appointment.new] do |f| %>
+          <div class="booking-steps">
+            <!-- Étape 1: Sélection de la date -->
+            <div class="date-selection">
+              <%= f.input :date,
                                   as: :date,
                                   html5: true,
                                   label: "Choisissez une date",
@@ -49,43 +44,38 @@
                                     min: Date.today,
                                     class: 'date-picker'
                                   } %>
-                    </div>
-
-                    <!-- Étape 2: Sélection de l'heure -->
-                    <div class="time-slots">
-                      <label>Choisissez un créneau</label>
-                      <div class="slots-grid">
-                        <% (9..17).each do |hour| %>
-                          <% [0, 30].each do |minutes| %>
-                            <%
+            </div>
+            <!-- Étape 2: Sélection de l'heure -->
+            <div class="time-slots">
+              <label>Choisissez un créneau</label>
+              <div class="slots-grid">
+                <% (9..17).each do |hour| %>
+                  <% [0, 30].each do |minutes| %>
+                    <%
                               time = sprintf("%02d:%02d", hour, minutes)
                               is_booked = @daddy_service.appointments.exists?(
                                 date: Date.today.beginning_of_day + hour.hours + minutes.minutes
                               )
                             %>
-                            <button type="button"
+                    <button type="button"
                                     class="time-slot <%= 'booked' if is_booked %>"
                                     <%= 'disabled' if is_booked %>
                                     data-time="<%= time %>">
-                              <%= time %>
-                            </button>
-                          <% end %>
-                        <% end %>
-                      </div>
-                      <%= f.input :time, as: :hidden %>
-                    </div>
-                  </div>
-
-                  <%= f.button :submit, "Confirmer la réservation", class: "submit-button" %>
+                      <%= time %>
+                    </button>
+                  <% end %>
                 <% end %>
               </div>
+              <%= f.input :time, as: :hidden %>
             </div>
-            <%= link_to 'Index', appointments_path %>
-
-        </aside>
-
+          </div>
+          <%= f.button :submit, "Confirmer la réservation", class: "submit-button" %>
+        <% end %>
+      </div>
+    </div>
+    <%= link_to 'Index', appointments_path %>
+  </aside>
 </main>
-
 </body>
 </html>
 <script>
@@ -210,7 +200,6 @@
       updateAvailableSlots(dateInput.value);
     }
   });
-
 </script>
 <style>
   .booking-steps {
@@ -506,7 +495,7 @@
 
   /* Modal styles */
   /* Styles pour le bouton principal */
-.book-button {
+  .book-button {
   padding: 12px 24px;
   background: var(--primary-color);
   color: white;
@@ -515,15 +504,15 @@
   font-size: 16px;
   cursor: pointer;
   transition: transform 0.2s ease, background 0.3s ease;
-}
+  }
 
-.book-button:hover {
+  .book-button:hover {
   background: #d35400;
   transform: translateY(-2px);
-}
+  }
 
-/* Styles pour le modal */
-.modal {
+  /* Styles pour le modal */
+  .modal {
   display: none;
   position: fixed;
   top: 0;
@@ -534,13 +523,13 @@
   z-index: 1000;
   opacity: 0;
   transition: opacity 0.3s ease;
-}
+  }
 
-.modal.active {
+  .modal.active {
   opacity: 1;
-}
+  }
 
-.modal-content {
+  .modal-content {
   position: relative;
   background: white;
   width: 90%;
@@ -551,14 +540,14 @@
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   transform: translateY(-20px);
   transition: transform 0.3s ease;
-}
+  }
 
-.modal.active .modal-content {
+  .modal.active .modal-content {
   transform: translateY(0);
-}
+  }
 
-/* Style pour le bouton fermer */
-.close {
+  /* Style pour le bouton fermer */
+  .close {
   position: absolute;
   top: 20px;
   right: 20px;
@@ -566,39 +555,39 @@
   cursor: pointer;
   color: #666;
   transition: color 0.3s ease;
-}
+  }
 
-.close:hover {
+  .close:hover {
   color: #333;
-}
+  }
 
-/* Styles pour le formulaire */
-.form-group {
+  /* Styles pour le formulaire */
+  .form-group {
   margin-bottom: 24px;
-}
+  }
 
-label {
+  label {
   display: block;
   margin-bottom: 8px;
   color: #333;
   font-size: 14px;
-}
+  }
 
-input[type="datetime-local"] {
+  input[type="datetime-local"] {
   width: 100%;
   padding: 12px;
   border: 2px solid #eee;
   border-radius: 8px;
   font-size: 16px;
   transition: border-color 0.3s ease;
-}
+  }
 
-input[type="datetime-local"]:focus {
+  input[type="datetime-local"]:focus {
   outline: none;
   border-color: #007bff;
-}
+  }
 
-.submit-button {
+  .submit-button {
   width: 100%;
   padding: 12px;
   background: var(--primary-color);
@@ -608,10 +597,10 @@ input[type="datetime-local"]:focus {
   font-size: 16px;
   cursor: pointer;
   transition: background 0.3s ease, transform 0.2s ease;
-}
+  }
 
-.submit-button:hover {
+  .submit-button:hover {
   background: #d35400;
   transform: translateY(-2px);
-}
+  }
 </style>

@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :daddy_services
   has_many :categories, through: :daddy_services
-  has_many :appointments
+  has_many :appointments, dependent: :destroy
   has_many :daddy_services, through: :appointments
 
 end

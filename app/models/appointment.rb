@@ -6,6 +6,7 @@ class Appointment < ApplicationRecord
   attr_accessor :time  # Ajoute l'attribut virtuel time
 
   before_validation :combine_date_and_time
+  
 
   private
 

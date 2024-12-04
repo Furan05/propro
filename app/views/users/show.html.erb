@@ -5,7 +5,6 @@
       <h1><%= @user.username %> <%= "(Pro)" if @user.role %></h1>
     </div>
   </div>
-
   <% if @user.role %>
     <div class="services-section">
       <h2>Services proposés</h2>
@@ -31,8 +30,6 @@
     </div>
   <% end %>
 </div>
-
-
 <style>
   .profile-container {
     max-width: 1200px;
@@ -125,42 +122,42 @@
 
 
   /* Styles pour les cartes de service */
-.services-grid {
+  .services-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1.5rem;
   margin-top: 1rem;
-}
+  }
 
-.service-card {
+  .service-card {
   background: white;
   border-radius: 8px;
   padding: 1.5rem;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   transition: transform 0.2s ease;
-}
+  }
 
-.service-card:hover {
+  .service-card:hover {
   transform: translateY(-5px);
-}
+  }
 
-.service-card h3 {
+  .service-card h3 {
   color: #e67e22;
   margin-bottom: 1rem;
-}
+  }
 
-.price {
+  .price {
   font-size: 1.2rem;
   font-weight: bold;
   color: #2ecc71;
-}
+  }
 
-.category {
+  .category {
   color: #666;
   margin: 0.5rem 0;
-}
+  }
 
-.view-button, .book-button, .create-button {
+  .view-button, .book-button, .create-button {
   display: inline-block;
   padding: 0.8rem 1.5rem;
   background: #e67e22;
@@ -169,26 +166,26 @@
   border-radius: 4px;
   margin-top: 1rem;
   transition: background 0.3s ease;
-}
+  }
 
-.view-button:hover, .book-button:hover, .create-button:hover {
+  .view-button:hover, .book-button:hover, .create-button:hover {
   background: #d35400;
-}
+  }
 
-.not-pro-message {
+  .not-pro-message {
   text-align: center;
   padding: 2rem;
   background: #f8f9fa;
   border-radius: 8px;
   margin-top: 2rem;
-}
+  }
 
-/* Sections spécifiques au profil pro */
-.services-section {
+  /* Sections spécifiques au profil pro */
+  .services-section {
   background: white;
   border-radius: 12px;
   padding: 2rem;
   margin-bottom: 2rem;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
+  }
 </style>
