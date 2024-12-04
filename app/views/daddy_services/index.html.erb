@@ -169,7 +169,7 @@
 
 </style>
 <%= render 'componants/searchbar' %>
-
+<%= button_to "Logout", destroy_user_session_path, method: :delete, data: { turbo: false } %>
 <nav class="categories-nav">
   <ul>
     <li class="active">All professions</li>
