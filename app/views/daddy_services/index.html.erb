@@ -70,10 +70,22 @@
     padding: 20px;
   }
 
+  .service-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
   .service-card {
     border: 1px solid #ddd;
     border-radius: 8px;
     overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .service-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   }
 
   .service-card img {
@@ -105,10 +117,22 @@
     align-items: center;
     gap: 10px;
     margin: 10px 0;
+    font-size: 0.9em;
   }
 
   .stars {
     color: #FFD700;
+    letter-spacing: 2px;
+  }
+
+  .service-content h3 {
+    margin: 10px 0;
+    font-size: 1.1em;
+  }
+
+  .service-content p {
+    margin: 5px 0;
+    color: #666;
   }
 
   .price {
@@ -123,17 +147,25 @@
   }
 
   .view-all-button {
+    display: inline-block;
     padding: 10px 30px;
     border: 2px solid #FF6B2B;
     color: #FF6B2B;
     background: transparent;
     border-radius: 4px;
     cursor: pointer;
+    text-decoration: none;
+  }
+
+  .view-all-button:hover {
+    background: #FF6B2B;
+    color: white;
   }
 
   footer {
     background: #f9f9f9;
     padding: 40px 20px;
+    margin-top: 40px;
   }
 
   .footer-content {
@@ -194,26 +226,30 @@
 
 <div class="services-grid">
   <% @daddy_services.each do |service| %>
-    <div class="service-card">
-      <div class="service-image">
-        <img src="https://placehold.co/400x250/gray/white" alt="<%= service.title %>">
-      </div>
-      <div class="service-content">
-        <span class="tag">COURSE</span>
-        <span class="tag best-seller">BEST SELLER</span>
-        <h3><%= service.title %></h3>
-        <div class="rating">
-          <span class="stars">★★★★☆</span>
-          <span>(191)</span>
-          <span>1.3 hours</span>
+    <%= link_to daddy_service_path(service), class: "service-link" do %>
+      <div class="service-card">
+        <div class="service-image">
+          <img src="https://placehold.co/400x250/gray/white" alt="<%= service.title %>">
         </div>
-        <p>by <%= service.user.username %></p>
-        <p class="price">$<%= service.price %></p>
+        <div class="service-content">
+          <span class="tag">COURSE</span>
+          <span class="tag best-seller">BEST SELLER</span>
+          <h3><%= service.title %></h3>
+          <div class="rating">
+            <span class="stars">★★★★☆</span>
+            <span>(191)</span>
+            <span>1.3 hours</span>
+          </div>
+          <p>by <%= service.user.username %></p>
+          <p class="price">$<%= service.price %></p>
+        </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
 </div>
 
 <div class="view-all-wrapper">
-  <button class="view-all-button">View All Daddy</button>
+  <%= link_to "View All Daddy", daddy_services_path, class: "view-all-button" %>
 </div>
+
+
