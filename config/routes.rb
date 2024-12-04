@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   # Routes pour les catégories
   resources :categories
 
+  resources :users
+
+
   # Routes pour les DaddyServices
   resources :daddy_services do
     member do
