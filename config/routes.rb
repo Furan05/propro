@@ -13,11 +13,16 @@ Rails.application.routes.draw do
 
   # Routes pour les DaddyServices
   resources :daddy_services do
+    member do
+      get 'available_slots'
+      patch 'associate_service', to: 'categories#update'
+    end
     collection do
       get :search
     end
-    member do
-      patch 'associate_service', to: 'categories#update'
-    end
+    resources :appointments, only: [:create]
   end
+
+  # Routes pour les rendez-vous
+  resources :appointments, only: [:index]
 end

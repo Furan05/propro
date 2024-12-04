@@ -1,9 +1,30 @@
 class DaddyService < ApplicationRecord
   belongs_to :user
   belongs_to :category
+  has_many :appointments
+  has_many :users, through: :appointments
+
 
   def self.search_by_title_and_category(query)
     where("title ILIKE ? OR categories.name ILIKE ?", "%#{query}%", "%#{query}%")
     .joins(:category)
+  end
+
+  def available_slots(date = Date.today)
+    # Crée un tableau de tous les créneaux possibles pour la journée
+    all_slots = []
+    current = date.beginning_of_day + 9.hours # Commence à 9h
+    end_time = date.beginning_of_day + 18.hours # Termine à 18h
+
+    while current < end_time
+      all_slots << current
+      current += 30.minutes
+    end
+
+    # Retire les créneaux déjà réservés
+    taken_slots = appointments.where(date: date.beginning_of_day..date.end_of_day)
+                            .pluck(:date)
+
+    all_slots - taken_slots
   end
 end

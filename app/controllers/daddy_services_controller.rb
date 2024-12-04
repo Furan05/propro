@@ -51,6 +51,28 @@ class DaddyServicesController < ApplicationController
     }
   end
 
+# app/controllers/daddy_services_controller.rb
+def available_slots
+  @daddy_service = DaddyService.find(params[:id])
+  date = Date.parse(params[:date])
+
+  # Récupère les créneaux déjà réservés pour cette date
+  booked_slots = @daddy_service.appointments
+                              .where(date: date.beginning_of_day..date.end_of_day)
+                              .pluck(:date)
+                              .map { |d| d.strftime("%H:%M") }
+
+  # Crée un tableau de tous les créneaux possibles
+  all_slots = (9..17).flat_map do |hour|
+    [0, 30].map { |min| sprintf("%02d:%02d", hour, min) }
+  end
+
+  # Retire les créneaux déjà réservés
+  available_slots = all_slots - booked_slots
+
+  render json: { available_slots: available_slots }
+end
+
   private
 
   def daddy_service_params
