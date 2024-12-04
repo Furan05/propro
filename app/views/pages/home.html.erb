@@ -18,27 +18,28 @@
             font-family: Arial, sans-serif;
         }
 
-        .header {
+        .header-home {
             background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://lannetech.com/client/admin/img/674f28c388f3d.png');
             background-size: cover;
             background-position: center;
             height: 400px;
             color: white;
             padding: 20px;
+            position: relative;
         }
 
-        .logo {
+        .logo-home {
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .logo-icon {
+        .logo-home-icon {
             padding: 10px;
             border-radius: 8px;
         }
 
-        .search-container {
+        .search-container-home {
             max-width: 800px;
             margin: 40px auto;
         }
@@ -114,7 +115,7 @@
             color: #e27730;
             margin: 10px 0;
         }
-        .search-bar {
+        .search-bar-home {
             flex-grow: 1;
             margin: 0 2rem;
           position: relative;
@@ -132,7 +133,7 @@
         .view-all {
           white-space: nowrap;
         }
-          .search-bar input[type="text"] {
+          .search-bar-home input[type="text"] {
               width: 80%;
               padding: 0.8rem;
               border: 1px solid #ddd;
@@ -246,20 +247,21 @@
               border-radius: 5px;
               background-color: rgba(255, 255, 255, 0.1);
           }
+
     </style>
 </head>
 <body>
-    <div class="header">
+    <div class="header-home">
       <div class="top-right">
         <%= link_to "Sign in / Join", user_session_path, class: "sign-in"  %>
       </div>
-        <div class="search-container">
-          <div class="logo">
-              <img width="100" src="https://lannetech.com/client/admin/img/674f2a533026b.png" class="logo-icon">
+        <div class="search-container-home">
+          <div class="logo-home">
+              <img width="100" src="https://lannetech.com/client/admin/img/674f2a533026b.png" class="logo-home-icon">
               <h1>Find Your Daddy.<br>Sur Demande.</h1>
           </div>
           <p>Professional courses, led by the world’s top Daddy.</p>
-            <div class="search-bar" data-controller="search" data-search-url-value="<%= search_daddy_services_path %>">
+            <div class="search-bar-home" data-controller="search" data-search-url-value="<%= search_daddy_services_path %>">
               <%= form_with url: search_daddy_services_path, method: :get, local: true, class: 'search-form' do |f| %>
                 <%= f.text_field :query,
                     placeholder: "What kind of Daddy you need?",

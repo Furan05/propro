@@ -1,7 +1,7 @@
 class DaddyService < ApplicationRecord
   belongs_to :user
   belongs_to :category
-  has_many :appointments
+  has_many :appointments, dependent: :destroy
   has_many :users, through: :appointments
 
   after_create :update_user_pro_status

@@ -1,6 +1,10 @@
 class DaddyServicesController < ApplicationController
   def index
-    @daddy_services = DaddyService.all
+    if params[:category_id].present?
+      @daddy_services = DaddyService.where(category_id: params[:category_id])
+    else
+      @daddy_services = DaddyService.all
+    end
   end
 
   def show
