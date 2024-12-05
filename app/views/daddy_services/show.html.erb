@@ -16,7 +16,6 @@
     <div class="rating">
       <span class="stars">⭐ <%= @daddy_service.average_rating %></span>
       <span class="reviews">(<%= @daddy_service.reviews.count %>)</span>
-      <span class="duration">1.7 hours</span>
       <%= link_to "new Review", new_daddy_service_review_path(@daddy_service) %>
       <%= link_to "See review", reviews_path %>
     </div>
@@ -75,7 +74,6 @@
         <% end %>
       </div>
     </div>
-    <%= link_to 'Index', appointments_path %>
   </aside>
 </main>
 </body>
