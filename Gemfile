@@ -49,6 +49,8 @@ gem "autoprefixer-rails"
 gem "font-awesome-sass", "~> 6.1"
 gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
+gem "cloudinary"
+
 
 group :development, :test do
   gem "dotenv-rails"
@@ -70,7 +72,6 @@ end
 gem "devise"
 gem "faker"
 
-gem "cloudinary"
 
 gem 'htmlbeautifier'
 
