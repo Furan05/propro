@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     end
     resources :appointments, only: [:create]
     resources :categories, only: [:show]
-    resources :reviews, only: [:new, :create]
+    resources :reviews
   end
 
   # Routes pour les rendez-vous
