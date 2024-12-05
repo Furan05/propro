@@ -3,6 +3,7 @@ class DaddyService < ApplicationRecord
   belongs_to :category
   has_many :appointments, dependent: :destroy
   has_many :users, through: :appointments
+  has_one_attached :image
 
   after_create :update_user_pro_status
   after_destroy :check_user_pro_status

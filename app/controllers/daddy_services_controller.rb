@@ -80,6 +80,6 @@ end
   private
 
   def daddy_service_params
-    params.require(:daddy_service).permit(:title, :description, :price, :category_id)
+    params.require(:daddy_service).permit(:title, :description, :price, :category_id, :image)
   end
 end
