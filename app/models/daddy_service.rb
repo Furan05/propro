@@ -3,11 +3,18 @@ class DaddyService < ApplicationRecord
   belongs_to :category
   has_many :appointments, dependent: :destroy
   has_many :users, through: :appointments
+  has_many :reviews, dependent: :destroy
 
   after_create :update_user_pro_status
   after_destroy :check_user_pro_status
 
+  def average_rating
+    reviews.average(:rating)
+  end
+
   private
+
+
 
   def update_user_pro_status
     user.update(role: true) unless user.role

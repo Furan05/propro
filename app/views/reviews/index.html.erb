@@ -1,0 +1,35 @@
+<div class="reviews-container">
+  <h2>All Reviews</h2>
+
+  <div class="reviews-list">
+    <% Review.all.each do |review| %>
+      <div class="review-card">
+        <div class="review-header">
+          <div class="user-info">
+            <strong><%= review.user.username %></strong>
+            <span>reviewed <%= review.daddy_service.title %></span>
+          </div>
+          <div class="rating">
+            <% review.rating.times do %>
+              <i class="fas fa-star"></i>
+            <% end %>
+            <% (5 - review.rating).times do %>
+              <i class="far fa-star"></i>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="review-content">
+          <p><%= review.comment %></p>
+        </div>
+
+        <div class="review-footer">
+          <small>Posted on: <%= review.created_at.strftime("%B %d, %Y") %></small>
+          <% if current_user == review.user %>
+    
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
