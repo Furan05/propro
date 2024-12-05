@@ -21,7 +21,7 @@
       <h1 class="profile-name">
         <%= @user.username %>
         <% if @user.role %>
-          <span class="pro-badge">PRO</span>
+          <span class="pro-badge">PRO <i class='bx bxs-badge-check'></i></span>
         <% end %>
       </h1>
       <div class="user-details">
@@ -43,19 +43,19 @@
         <button class="tab-btn active"
             data-tabs-target="tab"
             data-action="click->tabs#switch">
-          Rendez-vous
+            <i class='bx bx-calendar-event' ></i> Rendez-vous
         </button>
         <% if @user.role %>
           <button class="tab-btn"
               data-tabs-target="tab"
               data-action="click->tabs#switch">
-            Services
+              <i class='bx bx-rocket' ></i> Services
           </button>
         <% end %>
         <button class="tab-btn"
             data-tabs-target="tab"
             data-action="click->tabs#switch">
-          Avis
+            <i class='bx bx-star' ></i> Avis
         </button>
       </div>
       <%# Tabs Content %>

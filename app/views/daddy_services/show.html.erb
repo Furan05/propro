@@ -2,11 +2,7 @@
 <main class="service-card">
   <div class="images-container">
     <div class="main-image">
-      <img src="batman-main.jpg" alt="Batman silhouette">
-    </div>
-    <div class="secondary-images">
-      <img src="batman-street.jpg" alt="Batman street">
-      <img src="batman-smoke.jpg" alt="Batman smoke">
+      <img src="https://lannetech.com/client/admin/img/6751b972ef768.jpg" alt="Batman silhouette">
     </div>
   </div>
   <div class="service-info">
@@ -14,7 +10,7 @@
       <%= @daddy_service.user.username %>
     </h1>
     <div class="rating">
-      <span class="stars">⭐ <%= @daddy_service.average_rating %></span>
+      <span class="stars"><i class='bx bxs-star' ></i><i class='bx bxs-star' ></i><i class='bx bxs-star' ></i><i class='bx bxs-star' ></i> <%= @daddy_service.average_rating %></span>
       <span class="reviews">(<%= @daddy_service.reviews.count %>)</span>
       <%= link_to "new Review", new_daddy_service_review_path(@daddy_service) %>
       <%= link_to "See review", reviews_path %>
@@ -281,17 +277,6 @@
       margin: 0 auto;
   }
 
-  .logo {
-      background: var(--primary-color);
-      color: white;
-      width: 40px;
-      height: 40px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-  }
 
   .search-bar {
       flex-grow: 1;

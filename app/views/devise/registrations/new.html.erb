@@ -1,30 +1,258 @@
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
+<!-- HTML modifié avec des classes pour le style -->
+<div class="signup-container">
+  <h2 class="signup-title">Create Account</h2>
 
-  <div class="form-inputs">
-    <%= f.input :username,
-                required: true,
-                input_html: { autocomplete: "username" } %>
-    <%= f.input :role,
-                as: :select,
-                collection: [["Pro", true], ["Papro", false]],
-                required: true %>
-    <%= f.input :email,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "email" } %>
-    <%= f.input :password,
-                required: true,
-                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: true,
-                input_html: { autocomplete: "new-password" } %>
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "signup-form" }) do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-inputs">
+      <div class="input-group">
+        <%= f.input :username,
+                    required: true,
+                    input_html: { autocomplete: "username", class: "form-input" } %>
+      </div>
+
+      <div class="input-group">
+        <%= f.input :role,
+                    as: :select,
+                    collection: [["Pro", true], ["Papro", false]],
+                    required: true,
+                    input_html: { class: "form-select" } %>
+      </div>
+
+      <div class="input-group">
+        <%= f.input :email,
+                    required: true,
+                    autofocus: true,
+                    input_html: { autocomplete: "email", class: "form-input" } %>
+      </div>
+
+      <div class="input-group">
+        <%= f.input :password,
+                    required: true,
+                    hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                    input_html: { autocomplete: "new-password", class: "form-input" } %>
+      </div>
+
+      <div class="input-group">
+        <%= f.input :password_confirmation,
+                    required: true,
+                    input_html: { autocomplete: "new-password", class: "form-input" } %>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, "Sign up", class: "signup-btn" %>
+    </div>
+  <% end %>
+
+  <div class="links-section">
+    <%= render "devise/shared/links" %>
   </div>
+</div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
-  </div>
-<% end %>
+<style>
+  /* Conteneur principal */
+.signup-container, .edit-container {
+  max-width: 500px;
+  margin: 3rem auto;
+  padding: 2.5rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  animation: fadeIn 0.6s ease-out;
+}
 
-<%= render "devise/shared/links" %>
+/* Titres */
+.signup-title, .edit-title {
+  color: #333;
+  font-size: 2.2rem;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Formulaires */
+.signup-form, .edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+  width: 100%;
+}
+
+/* Groupe d'inputs */
+.input-group {
+  margin-bottom: 1.2rem;
+  width: 100%;
+}
+
+/* Reset des styles par défaut de Simple Form */
+.form-group {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+/* Styles communs pour tous les inputs */
+.form-control,
+.form-select,
+.form-input,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+  width: 100% !important;
+  padding: 1rem !important;
+  border: 1.5px solid #eef0f5 !important;
+  border-radius: 8px !important;
+  font-size: 1rem !important;
+  transition: all 0.3s ease !important;
+  background-color: #fff !important;
+  box-sizing: border-box !important;
+  height: auto !important;
+  line-height: 1.5 !important;
+}
+
+/* Style focus pour tous les inputs */
+.form-control:focus,
+.form-select:focus,
+.form-input:focus,
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+select:focus {
+  border-color: #ff9966 !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(255, 153, 102, 0.15) !important;
+}
+
+/* Style spécifique pour le select */
+select.form-select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23666' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem !important;
+}
+
+/* Texte d'aide */
+.hint {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 0.5rem;
+  display: block;
+}
+
+/* Boutons */
+.signup-btn, .update-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #ff9966, #ff5e62);
+  color: white;
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-top: 1rem;
+}
+
+.signup-btn:hover, .update-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 153, 102, 0.3);
+}
+
+/* Section liens */
+.links-section {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.links-section a {
+  color: #666;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+  margin: 0 0.5rem;
+}
+
+.links-section a:hover {
+  color: #ff9966;
+}
+
+/* Bouton d'annulation */
+.cancel-btn {
+  width: 100%;
+  background-color: #fff;
+  color: #ff5e62;
+  border: 1px solid #ff5e62;
+  padding: 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.cancel-btn:hover {
+  background-color: #ff5e62;
+  color: white;
+}
+
+/* Section d'annulation */
+.cancel-section {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #eee;
+}
+
+.cancel-title {
+  color: #333;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Animation d'entrée */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Messages d'erreur */
+.error_notification {
+  color: #ff5e62;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  width: 100%;
+}
+
+.field_with_errors .form-control {
+  border-color: #ff5e62 !important;
+}
+
+/* Labels */
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+/* Media Queries */
+@media (max-width: 600px) {
+  .signup-container, .edit-container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .signup-title, .edit-title {
+    font-size: 1.8rem;
+  }
+}
+</style>
