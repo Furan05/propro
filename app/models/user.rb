@@ -7,5 +7,6 @@ class User < ApplicationRecord
   has_many :categories, through: :daddy_services
   has_many :appointments, dependent: :destroy
   has_many :daddy_services, through: :appointments
+  has_many :reviews, dependent: :destroy
 
 end

@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'reviews/new'
+  get 'reviews/edit'
+  get 'reviews/detroy'
   devise_for :users
   root to: "pages#home"
 
@@ -24,8 +27,10 @@ Rails.application.routes.draw do
     end
     resources :appointments, only: [:create]
     resources :categories, only: [:show]
+    resources :reviews, only: [:new, :create]
   end
 
   # Routes pour les rendez-vous
+  resources :reviews, only: [:index, :show]
   resources :appointments, only: [:index]
 end
