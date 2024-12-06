@@ -43,19 +43,19 @@
         <button class="tab-btn active"
             data-tabs-target="tab"
             data-action="click->tabs#switch">
-            <i class='bx bx-calendar-event' ></i> Rendez-vous
+          <i class='bx bx-calendar-event' ></i> Rendez-vous
         </button>
         <% if @user.role %>
           <button class="tab-btn"
               data-tabs-target="tab"
               data-action="click->tabs#switch">
-              <i class='bx bx-rocket' ></i> Services
+            <i class='bx bx-rocket' ></i> Services
           </button>
         <% end %>
         <button class="tab-btn"
             data-tabs-target="tab"
             data-action="click->tabs#switch">
-            <i class='bx bx-star' ></i> Avis
+          <i class='bx bx-star' ></i> Avis
         </button>
       </div>
       <%# Tabs Content %>
@@ -67,7 +67,11 @@
             <div class="appointment-card">
               <h4><%= appointment.daddy_service.title %></h4>
               <p>Date: <%= appointment.date.strftime("%d/%m/%Y") %></p>
-              <p>Status: <%= appointment.status %></p>
+              <% if appointment.status === 'true' %>
+                <p>Status: <i class="fa-solid fa-check" style="color: green"></i></p>
+              <% else %>
+                <p>Status: <i class="fa-solid fa-xmark" style="color: red"></i></p>
+              <% end %>
             </div>
           <% end %>
         </div>
@@ -82,11 +86,8 @@
                 <p>Prix: <%= number_to_currency(service.price) %></p>
                 <p>Catégorie: <%= service.category.name %></p>
                 <div class="service-actions">
-                  <%= link_to "Modifier", edit_daddy_service_path(service), class: "edit-btn" %>
-                  <%= link_to "Supprimer", daddy_service_path(service),
-                  method: :delete,
-                  data: { confirm: "Êtes-vous sûr ?" },
-                  class: "delete-btn" %>
+                    <i class="fas fa-edit"></i>
+                    <i class="fas fa-trash"></i>
                 </div>
               </div>
             <% end %>
@@ -94,8 +95,40 @@
         <% end %>
         <%# Reviews Tab %>
         <div id="reviews" class="tab-pane" data-tabs-target="pane">
-          <h3>Avis</h3>
-          <!-- Add reviews content here -->
+          <div id="reviews" class="tab-pane" data-tabs-target="pane">
+            <h3>Mes Avis</h3>
+            <div class="reviews-container">
+              <% @user.reviews.each do |review| %>
+                <div class="review-card">
+                  <div class="review-header">
+                    <div class="service-info">
+                      <strong>Service: <%= link_to review.daddy_service.title, daddy_service_path(review.daddy_service) %></strong>
+                    </div>
+                    <div class="rating">
+                      <% review.rating.times do %>
+                        <i class="fas fa-star" style="color: #fbc359"></i>
+                      <% end %>
+                      <% (5 - review.rating).times do %>
+                        <i class="far fa-star" style="color: #fbc359"></i>
+                      <% end %>
+                    </div>
+                  </div>
+                  <div class="review-content">
+                    <p><%= review.comment %></p>
+                    <small>Posted on <%= review.created_at.strftime("%B %d, %Y") %></small>
+                  </div>
+                  <div class="review-actions">
+                    <%= link_to reviews_edit_path do %>
+                      <i class="fas fa-edit"></i>
+                    <% end %>
+                    <%= link_to reviews_detroy_path do %>
+                      <i class="fas fa-trash"></i>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
         </div>
       </div>
     </div>
