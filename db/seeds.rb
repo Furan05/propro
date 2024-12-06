@@ -48,4 +48,34 @@ rescue OpenURI::HTTPError => e
   puts "Skipping image for service: #{service.title} - #{e.message}"
 end
 
+puts "Creating reviews..."
+
+DaddyService.all.each do |service|
+  # Random number of reviews between 4 and 20
+  rand(4..20).times do
+    Review.create!(
+      rating: rand(1..5),
+      comment: Faker::Lorem.paragraph(sentence_count: rand(1..3)),
+      user: User.where.not(id: service.user_id).sample, # Avoid self-reviews
+      daddy_service: service
+    )
+  end
+  puts "Created #{service.reviews.count} reviews for service: #{service.title}"
+end
+
+puts "Creating appointments..."
+
+DaddyService.all.each do |service|
+  # Random number of appointments between 1 and 10
+  rand(1..10).times do
+    Appointment.create!(
+      date: Faker::Time.between(from: DateTime.now, to: 30.days.from_now),
+      user: User.where.not(id: service.user_id).sample, # Avoid self-appointments
+      daddy_service: service,
+      status: [true, false].sample
+    )
+  end
+  puts "Created #{service.appointments.count} appointments for service: #{service.title}"
+end
+
 puts "end seeding"
