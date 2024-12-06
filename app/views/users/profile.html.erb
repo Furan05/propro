@@ -20,9 +20,7 @@
     <div class="profile-info">
       <h1 class="profile-name">
         <%= @user.username %>
-        <% if @user.role %>
           <span class="pro-badge">PRO <i class='bx bxs-badge-check'></i></span>
-        <% end %>
       </h1>
       <div class="user-details">
         <p><i class="fas fa-envelope"></i> <%= @user.email %></p>
@@ -45,13 +43,11 @@
             data-action="click->tabs#switch">
           <i class='bx bx-calendar-event' ></i> Rendez-vous
         </button>
-        <% if @user.role %>
           <button class="tab-btn"
               data-tabs-target="tab"
               data-action="click->tabs#switch">
             <i class='bx bx-rocket' ></i> Services
           </button>
-        <% end %>
         <button class="tab-btn"
             data-tabs-target="tab"
             data-action="click->tabs#switch">
@@ -76,7 +72,6 @@
           <% end %>
         </div>
         <%# Services Tab %>
-        <% if @user.role %>
           <div id="services" class="tab-pane" data-tabs-target="pane">
             <h3>Mes Services</h3>
             <% DaddyService.where(user_id: current_user.id).each do |service| %>
@@ -85,10 +80,21 @@
                 <p><%= service.description %></p>
                 <p>Prix: <%= number_to_currency(service.price) %></p>
                 <p>Catégorie: <%= service.category.name %></p>
+
                 <div class="service-actions">
+               <%= link_to edit_daddy_service_path(service), class: "edit-btn" do %>
                   <i class="fas fa-edit"></i>
-                  <i class="fas fa-trash"></i>
-                </div>
+               <% end %>
+
+               <%= link_to daddy_service_path(service),
+                data: {
+                turbo_method: :delete,
+                turbo_confirm: "Êtes-vous sûr de vouloir supprimer ce service ?"
+                 },
+                class: "delete-btn" do %>
+                <i class="fas fa-trash"></i>
+               <% end %>
+            </div>
               </div>
               <div class="service-bookings">
                 <h4>Réservations pour ce service</h4>
@@ -131,7 +137,7 @@
               </div>
             <% end %>
           </div>
-        <% end %>
+
         <%# Reviews Tab %>
         <div id="reviews" class="tab-pane" data-tabs-target="pane">
           <div id="reviews" class="tab-pane" data-tabs-target="pane">

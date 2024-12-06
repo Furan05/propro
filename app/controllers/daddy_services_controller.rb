@@ -40,8 +40,11 @@ class DaddyServicesController < ApplicationController
 
   def destroy
     @daddy_service = DaddyService.find(params[:id])
-    @daddy_service.destroy
-    redirect_to daddy_services_path
+    if @daddy_service.destroy
+      redirect_to profile_path, notice: 'Service supprimé avec succès'
+    else
+      redirect_to profile_path, alert: 'Erreur lors de la suppression du service'
+    end
   end
 
   def search
