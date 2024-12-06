@@ -30,6 +30,12 @@ Rails.application.routes.draw do
     resources :reviews
   end
 
+  resources :appointments do
+    member do
+      patch :validate
+    end
+  end
+
   # Routes pour les rendez-vous
   resources :reviews, only: [:index, :show]
   resources :appointments, only: [:index]
