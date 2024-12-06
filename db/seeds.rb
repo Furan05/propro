@@ -33,14 +33,19 @@ users = User.all
 categories = Category.all
 
 15.times do
-  service = DaddyService.create!(
+  file = URI.open("https://picsum.photos/400")
+  service = DaddyService.new(
     title: Faker::Job.title,
     description: Faker::Lorem.paragraph(sentence_count: 3),
     price: rand(50..500),
     user: users.sample,
     category: categories.sample
   )
-  puts "Created service: #{service.title}"
+  service.photo.attach(io: file, filename: "service_#{service.title}.jpg", content_type: "image/jpg")
+  service.save!
+  puts "Created service: #{service.title} with image"
+rescue OpenURI::HTTPError => e
+  puts "Skipping image for service: #{service.title} - #{e.message}"
 end
 
 puts "end seeding"
