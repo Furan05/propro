@@ -20,8 +20,14 @@
       </div>
     </div>
     <div class="account">
-      <img src="avatar.jpg" alt="Profile">
-      <%= link_to current_user.username, profile_path(current_user), class: "username-link" %>
+      <%= link_to profile_path do %>
+        <img class="logo" src="https://lannetech.com/client/admin/img/67518f42cf3c2.png" alt="Profile">
+      <% end %>
+      <%= button_to "Logout",
+          destroy_user_session_path,
+          method: :delete,
+          data: { turbo: false },
+          class: "logout-button" %>
     </div>
   </nav>
 </header>

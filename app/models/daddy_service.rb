@@ -14,9 +14,7 @@ class DaddyService < ApplicationRecord
   end
 
   private
-
-
-
+  
   def update_user_pro_status
     user.update(role: true) unless user.role
   end
