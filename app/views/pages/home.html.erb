@@ -1,319 +1,312 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Find Your Daddy - Sur Demande</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
-       :root {
-      --primary-color: #E67E22;
-      --text-color: #333;
-      --background-color: #fff;
-        }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+      :root {
+            --primary-color: #E67E22;
+            --text-color: #333;
+            --background-color: #fff;
+       }
+       * {
+           margin: 0;
+           padding: 0;
+           box-sizing: border-box;
+           font-family: Arial, sans-serif;
+       }
 
-        .header-home {
-            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://lannetech.com/client/admin/img/674f28c388f3d.png');
-            background-size: cover;
-            background-position: center;
-            height: 400px;
-            color: white;
-            padding: 20px;
-            position: relative;
-        }
+       .header-home {
+           background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://lannetech.com/client/admin/img/674f28c388f3d.png');
+           background-size: cover;
+           background-position: center;
+           height: 400px;
+           color: white;
+           padding: 20px;
+           position: relative;
+       }
 
-        .logo-home {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+       .logo-home {
+           display: flex;
+           align-items: center;
+           gap: 10px;
+       }
 
-        .logo-home-icon {
-            padding: 10px;
-            border-radius: 8px;
-        }
+       .logo-home-icon {
+           padding: 10px;
+           border-radius: 8px;
+       }
 
-        .search-container-home {
-            max-width: 800px;
-            margin: 40px auto;
-        }
+       .search-container-home {
+           max-width: 800px;
+           margin: 40px auto;
+       }
 
-        .search-box {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
+       .search-box {
+           display: flex;
+           gap: 10px;
+           margin-bottom: 20px;
+       }
 
-        input[type="text"] {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            border-radius: 4px;
-        }
+       input[type="text"] {
+           flex: 1;
+           padding: 12px;
+           border: none;
+           border-radius: 4px;
+       }
 
-        .btn {
-            padding: 12px 24px;
-            background: #e27730;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+       .btn {
+           padding: 12px 24px;
+           background: #e27730;
+           color: white;
+           border: none;
+           border-radius: 4px;
+           cursor: pointer;
+       }
 
-        .tags {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
+       .tags {
+           display: flex;
+           gap: 10px;
+           flex-wrap: wrap;
+       }
 
-        .tag {
-            background: rgba(255,255,255,0.1);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 14px;
-        }
+       .tag {
+           background: rgba(255,255,255,0.1);
+           padding: 6px 12px;
+           border-radius: 20px;
+           font-size: 14px;
+       }
 
-        .features {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 20px;
-        }
+       .features {
+           display: grid;
+           grid-template-columns: repeat(3, 1fr);
+           gap: 40px;
+           max-width: 1200px;
+           margin: 40px auto;
+           padding: 20px;
+       }
 
-        .feature {
-            text-align: center;
-        }
+       .feature {
+           text-align: center;
+       }
 
-        .testimonial {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            max-width: 1200px;
-            margin: 40px auto;
-            background: #f5f5f5;
-            border: solid 1px rgb(200, 200, 200);
-        }
+       .testimonial {
+           display: grid;
+           grid-template-columns: 1fr 1fr;
+           max-width: 1200px;
+           margin: 40px auto;
+           background: #f5f5f5;
+           border: solid 1px rgb(200, 200, 200);
+       }
 
-        .testimonial-content {
-            padding: 40px;
-        }
+       .testimonial-content {
+           padding: 40px;
+       }
 
-        .testimonial-image {
-            background: #333;
-            color: white;
-            padding: 40px;
-        }
+       .testimonial-image {
+           background: #333;
+           color: white;
+           padding: 40px;
+       }
 
-        .stars {
-            color: #e27730;
-            margin: 10px 0;
-        }
-        .search-bar-home {
-            flex-grow: 1;
-            margin: 0 2rem;
-          position: relative;
-          margin-bottom: 10px;
-          display: flex;
-          align-items: center;
-          gap: 15px;
-        }
-        .search-form {
-          display: flex;
-          flex: 1;
-          gap: 10px;
-        }
+       .stars {
+           color: #e27730;
+           margin: 10px 0;
+       }
+       .search-bar-home {
+           flex-grow: 1;
+           margin: 0 2rem;
+         position: relative;
+         margin-bottom: 10px;
+         display: flex;
+         align-items: center;
+         gap: 15px;
+       }
+       .search-form {
+         display: flex;
+         flex: 1;
+         gap: 10px;
+       }
 
-        .view-all {
-          white-space: nowrap;
-        }
-          .search-bar-home input[type="text"] {
-              width: 80%;
-              padding: 0.8rem;
-              border: 1px solid #ddd;
-              border-radius: 4px;
-          }
+       .view-all {
+         white-space: nowrap;
+       }
+         .search-bar-home input[type="text"] {
+             width: 80%;
+             padding: 0.8rem;
+             border: 1px solid #ddd;
+             border-radius: 4px;
+         }
 
-          .search-button {
-              background: var(--primary-color);
-              color: white;
-              border: none;
-              padding: 0.8rem 1.5rem;
-              border-radius: 4px;
-              cursor: pointer;
-          }
+         .search-button {
+             background: var(--primary-color);
+             color: white;
+             border: none;
+             padding: 0.8rem 1.5rem;
+             border-radius: 4px;
+             cursor: pointer;
+         }
 
-          .search-button:hover {
-              transform: translateY(-2px);
-              box-shadow: 0 5px 15px rgba(230, 126, 34, 0.3);
-              background: #d35400;
-          }
+         .search-button:hover {
+             transform: translateY(-2px);
+             box-shadow: 0 5px 15px rgba(230, 126, 34, 0.3);
+             background: #d35400;
+         }
 
-          .search-button:active {
-              transform: translateY(0);
-              box-shadow: 0 2px 8px rgba(230, 126, 34, 0.3);
-          }
+         .search-button:active {
+             transform: translateY(0);
+             box-shadow: 0 2px 8px rgba(230, 126, 34, 0.3);
+         }
 
-          .search-button::after {
-              content: '';
-              position: absolute;
-              width: 100%;
-              height: 100%;
-              top: 0;
-              left: -100%;
-              background: linear-gradient(
-                  120deg,
-                  transparent,
-                  rgba(255, 255, 255, 0.2),
-                  transparent
-              );
-              transition: 0.5s;
-          }
+         .search-button::after {
+             content: '';
+             position: absolute;
+             width: 100%;
+             height: 100%;
+             top: 0;
+             left: -100%;
+             background: linear-gradient(
+                 120deg,
+                 transparent,
+                 rgba(255, 255, 255, 0.2),
+                 transparent
+             );
+             transition: 0.5s;
+         }
 
-          .search-button:hover::after {
-              left:
-          }
+         .search-button:hover::after {
+             left:
+         }
 
-          .btn:hover {
-              transform: translateY(-2px);
-              box-shadow: 0 5px 15px rgba(230, 126, 34, 0.3);
-              background: #d35400;
-          }
+         .btn:hover {
+             transform: translateY(-2px);
+             box-shadow: 0 5px 15px rgba(230, 126, 34, 0.3);
+             background: #d35400;
+         }
 
-          .btn:active {
-              transform: translateY(0);
-              box-shadow: 0 2px 8px rgba(230, 126, 34, 0.3);
-          }
+         .btn:active {
+             transform: translateY(0);
+             box-shadow: 0 2px 8px rgba(230, 126, 34, 0.3);
+         }
 
-          .search-suggestions {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: white;
-            margin-top: 4px;
-            border-radius: 4px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-          }
+         .search-suggestions {
+           position: absolute;
+           top: 100%;
+           left: 0;
+           right: 0;
+           background: white;
+           margin-top: 4px;
+           border-radius: 4px;
+           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+           z-index: 1000;
+         }
 
-          .suggestion-item {
-            display: block;
-            padding: 12px 16px;
-            color: #2563eb;
-            text-decoration: none;
-            font-size: 14px;
-            transition: background-color 0.2s ease;
-          }
+         .suggestion-item {
+           display: block;
+           padding: 12px 16px;
+           color: #2563eb;
+           text-decoration: none;
+           font-size: 14px;
+           transition: background-color 0.2s ease;
+         }
 
-          .suggestion-item:hover {
-            background-color: #f8f9fa;
-          }
+         .suggestion-item:hover {
+           background-color: #f8f9fa;
+         }
 
-          .search-suggestions a {
-            display: block;
-            padding: 0.8rem 1rem;
-            color: var(--text-color);
-            text-decoration: none;
-            border-bottom: 1px solid #eee;
-            transition: background-color 0.2s ease;
-          }
+         .search-suggestions a {
+           display: block;
+           padding: 0.8rem 1rem;
+           color: var(--text-color);
+           text-decoration: none;
+           border-bottom: 1px solid #eee;
+           transition: background-color 0.2s ease;
+         }
 
-          .search-suggestions a:last-child {
-            border-bottom: none;
-          }
+         .search-suggestions a:last-child {
+           border-bottom: none;
+         }
 
-          .search-suggestions a:hover {
-            background-color: #f8f9fa;
-            color: var(--primary-color);
-          }
-        .top-right {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-          }
+         .search-suggestions a:hover {
+           background-color: #f8f9fa;
+           color: var(--primary-color);
+         }
+       .top-right {
+          position: absolute;
+          top: 20px;
+          right: 20px;
+         }
 
-          .sign-in {
-              color: white;
-              text-decoration: none;
-              font-size: 14px;
-              padding: 8px 15px;
-              border-radius: 5px;
-              background-color: rgba(255, 255, 255, 0.1);
-          }
-
+         .sign-in {
+             color: white;
+             text-decoration: none;
+             font-size: 14px;
+             padding: 8px 15px;
+             border-radius: 5px;
+             background-color: rgba(255, 255, 255, 0.1);
+         }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="header-home">
       <div class="top-right">
         <%= link_to "Sign in / Join", user_session_path, class: "sign-in"  %>
       </div>
-        <div class="search-container-home">
-          <div class="logo-home">
-              <img width="100" src="https://lannetech.com/client/admin/img/674f2a533026b.png" class="logo-home-icon">
-              <h1>Find Your Daddy.<br>Sur Demande.</h1>
-          </div>
-          <p>Professional courses, led by the world’s top Daddy.</p>
-            <div class="search-bar-home" data-controller="search" data-search-url-value="<%= search_daddy_services_path %>">
-              <%= form_with url: search_daddy_services_path, method: :get, local: true, class: 'search-form' do |f| %>
-                <%= f.text_field :query,
+      <div class="search-container-home">
+        <div class="logo-home">
+          <img width="100" src="https://lannetech.com/client/admin/img/674f2a533026b.png" class="logo-home-icon">
+          <h1>Find Your Daddy.<br>
+            Sur Demande.</h1>
+        </div>
+        <p>Des services proposer par les meilleurs Daddy aux mondes</p>
+        <div class="search-bar-home" data-controller="search" data-search-url-value="<%= search_daddy_services_path %>">
+          <%= form_with url: search_daddy_services_path, method: :get, local: true, class: 'search-form' do |f| %>
+            <%= f.text_field :query,
                     placeholder: "What kind of Daddy you need?",
                     data: {
                       search_target: "input",
                       action: "keyup->search#suggest"
                     }
                 %>
-                <%= f.submit "Search", class: 'search-button animation-button' %>
-                <%= link_to "View all Daddys", daddy_services_path, class: 'btn animation-button' %>
-              <% end %>
-              <div class="search-suggestions"
+            <%= f.submit "Search", class: 'search-button animation-button' %>
+            <%= link_to "View all Daddys", daddy_services_path, class: 'btn animation-button' %>
+          <% end %>
+          <div class="search-suggestions"
                   data-search-target="suggestions"
                   style="display: none;">
-              </div>
-             </div>
-            <div class="tags">
-                <span class="tag">Popular:</span>
-                <span class="tag">Informaticien</span>
-                <span class="tag">Mécano</span>
-                <span class="tag">Plombier</span>
-                <span class="tag">Maçon</span>
-                <span class="tag">Barbecue</span>
-            </div>
+          </div>
         </div>
+      </div>
     </div>
-
     <div class="features">
-        <div class="feature">
-            <h3><i class='bx bxs-objects-vertical-bottom'></i> Practical skills</h3>
-            <p>Trouver les daddy qui ont le skill dont tu as besoin</p>
-        </div>
-        <div class="feature">
-            <h3><i class='bx bx-dumbbell' ></i> Find the best Daddy</h3>
-            <p>Trouvez le meilleur Darons sur la platforme #1 des aides à la personne!</p>
-        </div>
-        <div class="feature">
-            <h3><i class='bx bx-money-withdraw' ></i> No subscription fees</h3>
-            <p>Pas d'abonnement, payer les daddy directement vos tâches via le site</p>
-        </div>
+      <div class="feature">
+        <h3><i class='bx bxs-objects-vertical-bottom'></i>
+          Compétences pratiques</h3>
+        <p>Trouver les daddy qui ont le skill dont tu as besoin</p>
+      </div>
+      <div class="feature">
+        <h3><i class='bx bx-dumbbell' ></i> Trouve le meilleur daddy</h3>
+        <p>Trouvez le meilleur Darons sur la platforme #1 des aides à la personne!</p>
+      </div>
+      <div class="feature">
+        <h3><i class='bx bx-money-withdraw' ></i> Pas de frais d'abonnement</h3>
+        <p>Pas d'abonnement, payer les daddy directement vos tâches via le site</p>
+      </div>
     </div>
-
     <div class="testimonial">
-        <div class="testimonial-content">
-            <p>"Marcus did an amazing job cooking for our mama, she almost got cooked!"</p>
-            <div class="stars">★★★★★</div>
-            <p>Jean - Noel Toushuss</p>
-        </div>
-        <div class="testimonial-image">
-            <h3>Marcus Spencer</h3>
-            <p>Cooking Master,<br>Meat Lover and expert in flams.</p>
-        </div>
+      <div class="testimonial-content">
+        <p>"Marcus a fait un travail incroyable en cuisinant pour notre maman, elle a presque été cuite !"</p>
+        <div class="stars">★★★★★</div>
+        <p>Jean - Noel Toushuss</p>
+      </div>
+      <div class="testimonial-image">
+        <h3>Marcus Spencer</h3>
+        <p>Cooking Master,<br>
+
+Amateur de viande et expert en flams.</p>
+      </div>
     </div>
-</body>
+  </body>
 </html>

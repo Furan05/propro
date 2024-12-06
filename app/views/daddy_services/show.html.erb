@@ -16,8 +16,6 @@
     <div class="rating">
       <span>⭐ <%= @daddy_service.average_rating %></span>
       <span class="reviews">(<%= @daddy_service.reviews.count %>)</span>
-      <%= link_to "new Review", new_daddy_service_review_path(@daddy_service) %>
-      <%= link_to "See review", reviews_path %>
     </div>
     <p class="description"><%= @daddy_service.description %></p>
   </div>
@@ -75,7 +73,12 @@
   </aside>
 </main>
 <div class="reviews-section">
-  <h3>Reviews (<%= @daddy_service.reviews.count %>)</h3>
+  <div class="reviews-header">
+    <%= link_to new_daddy_service_review_path(@daddy_service), class: "add-review-btn" do %>
+      <i class="fas fa-plus"></i> Add Review
+    <% end %>
+    <h3>Reviews (<%= @daddy_service.reviews.count %>)</h3>
+  </div>
   <div class="reviews-container">
     <% @daddy_service.reviews.each do |review| %>
       <div class="review-card">
@@ -98,8 +101,8 @@
         </div>
         <% if current_user == review.user %>
           <div class="review-actions">
-              <i class="fas fa-edit"></i>
-              <i class="fas fa-trash"></i>
+            <i class="fas fa-edit"></i>
+            <i class="fas fa-trash"></i>
           </div>
         <% end %>
       </div>
@@ -250,6 +253,31 @@
     gap: 10px;
     margin-top: 10px;
   }
+
+  .reviews-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.add-review-btn {
+  background: #e67e22;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.add-review-btn:hover {
+  background: darken(#e67e22, 10%);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(230, 126, 34, 0.3);
+}
 
   .time-slot {
     padding: 10px;

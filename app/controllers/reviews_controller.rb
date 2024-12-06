@@ -31,7 +31,7 @@ class ReviewsController < ApplicationController
   def update
     @review = Review.find(params[:id])
     if @review.update(review_params)
-      redirect_to daddy_service_path(@review.daddy_service)
+      redirect_to profile_path
     else
       render :edit
     end
@@ -41,7 +41,7 @@ class ReviewsController < ApplicationController
     @review = Review.find(params[:id])
     daddy_service = @review.daddy_service
     @review.destroy
-    redirect_to daddy_service_path(daddy_service)
+    redirect_to profile_path
   end
 
   private

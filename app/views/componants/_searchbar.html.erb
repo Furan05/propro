@@ -6,7 +6,7 @@
     <div class="search-bar" data-controller="search" data-search-url-value="<%= search_daddy_services_path %>">
       <%= form_with url: search_daddy_services_path, method: :get, local: true do |f| %>
         <%= f.text_field :query,
-                    placeholder: "What kind of Daddy you need?",
+                    placeholder: "De quel Daddy a tu besoin ?",
                     data: {
                       search_target: "input",
                       action: "keyup->search#suggest"

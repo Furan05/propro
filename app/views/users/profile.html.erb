@@ -20,7 +20,7 @@
     <div class="profile-info">
       <h1 class="profile-name">
         <%= @user.username %>
-          <span class="pro-badge">PRO <i class='bx bxs-badge-check'></i></span>
+        <span class="pro-badge">PRO <i class='bx bxs-badge-check'></i></span>
       </h1>
       <div class="user-details">
         <p><i class="fas fa-envelope"></i> <%= @user.email %></p>
@@ -43,11 +43,11 @@
             data-action="click->tabs#switch">
           <i class='bx bx-calendar-event' ></i> Rendez-vous
         </button>
-          <button class="tab-btn"
+        <button class="tab-btn"
               data-tabs-target="tab"
               data-action="click->tabs#switch">
-            <i class='bx bx-rocket' ></i> Services
-          </button>
+          <i class='bx bx-rocket' ></i> Services
+        </button>
         <button class="tab-btn"
             data-tabs-target="tab"
             data-action="click->tabs#switch">
@@ -72,72 +72,69 @@
           <% end %>
         </div>
         <%# Services Tab %>
-          <div id="services" class="tab-pane" data-tabs-target="pane">
-            <h3>Mes Services</h3>
-            <% DaddyService.where(user_id: current_user.id).each do |service| %>
-              <div class="service-card">
-                <h4><%= service.title %></h4>
-                <p><%= service.description %></p>
-                <p>Prix: <%= number_to_currency(service.price) %></p>
-                <p>Catégorie: <%= service.category.name %></p>
-
-                <div class="service-actions">
-               <%= link_to edit_daddy_service_path(service), class: "edit-btn" do %>
+        <div id="services" class="tab-pane" data-tabs-target="pane">
+          <h3>Mes Services</h3>
+          <% DaddyService.where(user_id: current_user.id).each do |service| %>
+            <div class="service-card">
+              <h4><%= service.title %></h4>
+              <p><%= service.description %></p>
+              <p>Prix: <%= number_to_currency(service.price) %></p>
+              <p>Catégorie: <%= service.category.name %></p>
+              <div class="service-actions">
+                <%= link_to edit_daddy_service_path(service), class: "edit-btn" do %>
                   <i class="fas fa-edit"></i>
-               <% end %>
-
-               <%= link_to daddy_service_path(service),
+                <% end %>
+                <%= link_to daddy_service_path(service),
                 data: {
                 turbo_method: :delete,
                 turbo_confirm: "Êtes-vous sûr de vouloir supprimer ce service ?"
                  },
                 class: "delete-btn" do %>
-                <i class="fas fa-trash"></i>
-               <% end %>
-            </div>
+                  <i class="fas fa-trash"></i>
+                <% end %>
               </div>
-              <div class="service-bookings">
-                <h4>Réservations pour ce service</h4>
-                <div class="bookings-grid">
-                  <% service.appointments.each do |appointment| %>
-                    <div class="booking-card">
-                      <div class="booking-avatar">
-                      </div>
-                      <div class="booking-content">
-                        <div class="booking-header">
-                          <h5><%= appointment.user.username %></h5>
-                          <div class="status-actions">
-                            <% if appointment.status %>
-                              <span class="status-badge confirmed">Confirmé</span>
-                            <% else %>
-                              <span class="status-badge pending">En attente</span>
-                              <%= button_to validate_appointment_path(appointment),
+            </div>
+            <div class="service-bookings">
+              <h4>Réservations pour ce service</h4>
+              <div class="bookings-grid">
+                <% service.appointments.each do |appointment| %>
+                  <div class="booking-card">
+                    <div class="booking-avatar">
+                    </div>
+                    <div class="booking-content">
+                      <div class="booking-header">
+                        <h5><%= appointment.user.username %></h5>
+                        <div class="status-actions">
+                          <% if appointment.status %>
+                            <span class="status-badge confirmed">Confirmé</span>
+                          <% else %>
+                            <span class="status-badge pending">En attente</span>
+                            <%= button_to validate_appointment_path(appointment),
                       method: :patch,
                       class: "validate-btn",
                       data: { confirm: "Voulez-vous valider ce rendez-vous?" } do %>
-                                <i class="fas fa-check"></i>
-                              <% end %>
+                              <i class="fas fa-check"></i>
                             <% end %>
-                          </div>
+                          <% end %>
                         </div>
-                        <div class="booking-details">
-                          <div class="booking-date">
-                            <i class='bx bx-calendar'></i>
-                            <%= appointment.date.strftime("%d %b %Y") %>
-                          </div>
-                          <div class="booking-time">
-                            <i class='bx bx-time'></i>
-                            <%= appointment.date.strftime("%H:%M") %>
-                          </div>
+                      </div>
+                      <div class="booking-details">
+                        <div class="booking-date">
+                          <i class='bx bx-calendar'></i>
+                          <%= appointment.date.strftime("%d %b %Y") %>
+                        </div>
+                        <div class="booking-time">
+                          <i class='bx bx-time'></i>
+                          <%= appointment.date.strftime("%H:%M") %>
                         </div>
                       </div>
                     </div>
-                  <% end %>
-                </div>
+                  </div>
+                <% end %>
               </div>
-            <% end %>
-          </div>
-
+            </div>
+          <% end %>
+        </div>
         <%# Reviews Tab %>
         <div id="reviews" class="tab-pane" data-tabs-target="pane">
           <div id="reviews" class="tab-pane" data-tabs-target="pane">
@@ -163,10 +160,14 @@
                     <small>Posted on <%= review.created_at.strftime("%B %d, %Y") %></small>
                   </div>
                   <div class="review-actions">
-                    <%= link_to reviews_edit_path do %>
+                    <%= link_to edit_daddy_service_review_path(review.daddy_service_id, review.id), data: { turbo: false } do %>
                       <i class="fas fa-edit"></i>
                     <% end %>
-                    <%= link_to reviews_detroy_path do %>
+                    <%= link_to daddy_service_review_path(review.daddy_service_id, review.id),
+              data: {
+                turbo_method: :delete,
+                turbo_confirm: "Are you sure you want to delete this review?"
+              } do %>
                       <i class="fas fa-trash"></i>
                     <% end %>
                   </div>

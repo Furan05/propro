@@ -1,19 +1,5 @@
-
-<div class="review-form-container">
-  <h2>Add a Review</h2>
-
-  <%= simple_form_for [@daddy_service, @review] do |f| %>
-    <%= f.input :rating,
-                collection: 1..5,
-                label: "Rating",
-                prompt: "Select a rating",
-                input_html: { class: 'rating-select' } %>
-
-    <%= f.input :comment,
-                label: "Your Review",
-                placeholder: "Share your experience...",
-                input_html: { rows: 4 } %>
-
-    <%= f.submit "Submit Review", class: "submit-button" %>
-  <% end %>
-</div>
+<%= render 'form',
+    title: 'Add a Review',
+    submit_text: 'Submit Review',
+    daddy_service: @daddy_service,
+    review: @review %>
