@@ -1,0 +1,171 @@
+<div class="form-container">
+  <h2 class="login-title">Add a Review</h2>
+  <%= simple_form_for [@daddy_service, @review], html: { class: 'modern-form' } do |f| %>
+    <div class="form-field">
+      <%= f.input :rating,
+                collection: 1..5,
+                label: "Rating",
+                prompt: "Select a rating",
+                input_html: {
+            class: 'form-input',
+            placeholder: 'Rating'
+          },
+                wrapper_html: { class: 'input-wrapper' }  %>
+      <%= f.input :comment,
+                label: "Your Review",
+                placeholder: "Share your experience...",
+                input_html: {
+            class: 'form-input',
+            placeholder: 'Écrivez votre avis'
+          },
+                wrapper_html: { class: 'input-wrapper' } %>
+    </div>
+    <div class="form-actions">
+      <%= f.submit "Submit Review", class: 'submit-button' %>
+    </div>
+  <% end %>
+</div>
+
+<style>
+  :root {
+    --primary-color: #ff7b5c;
+    --text-color: #2d3436;
+    --background-color: #ffffff;
+    --error-color: #d63031;
+    --success-color: #00b894;
+    --border-radius: 12px;
+    --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+  }
+
+  .form-container {
+    max-width: 440px;
+    margin: 2rem auto;
+    padding: 3rem;
+    background: var(--background-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+  }
+
+  .form-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 2.5rem;
+    text-align: center;
+  }
+
+  .form-field {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    border: 1.5px solid #e9ecef;
+    border-radius: var(--border-radius);
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background: var(--background-color);
+    box-shadow: 0 0 0 4px rgba(255, 123, 92, 0.1);
+  }
+
+  .form-input::placeholder {
+    color: #adb5bd;
+  }
+
+  .form-checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .form-checkbox {
+    appearance: none;
+    width: 1.2rem;
+    height: 1.2rem;
+    border: 1.5px solid #e9ecef;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+  }
+
+  .form-checkbox:checked {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+  }
+
+  .form-checkbox:checked::after {
+    content: "✓";
+    position: absolute;
+    color: white;
+    font-size: 0.8rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .submit-button {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: white;
+    background: linear-gradient(135deg, #ff7b5c 0%, #ff5f6d 100%);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .submit-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(255, 123, 92, 0.3);
+  }
+
+  .submit-button:active {
+    transform: translateY(0);
+  }
+
+  .form-links {
+    text-align: center;
+    margin-top: 1.5rem;
+  }
+
+  .form-link {
+    color: #6c757d;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+  }
+
+  .form-link:hover {
+    color: var(--primary-color);
+  }
+
+  @media (max-width: 480px) {
+    .form-container {
+      padding: 2rem;
+      margin: 1rem;
+    }
+
+    .form-title {
+      font-size: 2rem;
+    }
+  }
+</style>

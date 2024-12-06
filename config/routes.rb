@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   # Routes pour les DaddyServices
   resources :daddy_services do
+    resources :reviews
     member do
       get 'available_slots'
       patch 'associate_service', to: 'categories#update'
@@ -27,7 +28,6 @@ Rails.application.routes.draw do
     end
     resources :appointments, only: [:create]
     resources :categories, only: [:show]
-    resources :reviews
   end
 
   resources :appointments do
@@ -37,6 +37,6 @@ Rails.application.routes.draw do
   end
 
   # Routes pour les rendez-vous
-  resources :reviews, only: [:index, :show]
+  resources :reviews, only: [:index, :new, :edit, :update, :destroy]
   resources :appointments, only: [:index]
 end
