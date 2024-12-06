@@ -67,10 +67,10 @@
             <div class="appointment-card">
               <h4><%= appointment.daddy_service.title %></h4>
               <p>Date: <%= appointment.date.strftime("%d/%m/%Y") %></p>
-              <% if appointment.status === 'true' %>
-                <p>Status: <i class="fa-solid fa-check" style="color: green"></i></p>
+              <% if appointment.status %>
+                <span class="status-badge confirmed">Validé</span>
               <% else %>
-                <p>Status: <i class="fa-solid fa-xmark" style="color: red"></i></p>
+                <span class="status-badge pending">En attente</span>
               <% end %>
             </div>
           <% end %>
@@ -86,8 +86,47 @@
                 <p>Prix: <%= number_to_currency(service.price) %></p>
                 <p>Catégorie: <%= service.category.name %></p>
                 <div class="service-actions">
-                    <i class="fas fa-edit"></i>
-                    <i class="fas fa-trash"></i>
+                  <i class="fas fa-edit"></i>
+                  <i class="fas fa-trash"></i>
+                </div>
+              </div>
+              <div class="service-bookings">
+                <h4>Réservations pour ce service</h4>
+                <div class="bookings-grid">
+                  <% service.appointments.each do |appointment| %>
+                    <div class="booking-card">
+                      <div class="booking-avatar">
+                      </div>
+                      <div class="booking-content">
+                        <div class="booking-header">
+                          <h5><%= appointment.user.username %></h5>
+                          <div class="status-actions">
+                            <% if appointment.status %>
+                              <span class="status-badge confirmed">Confirmé</span>
+                            <% else %>
+                              <span class="status-badge pending">En attente</span>
+                              <%= button_to validate_appointment_path(appointment),
+                      method: :patch,
+                      class: "validate-btn",
+                      data: { confirm: "Voulez-vous valider ce rendez-vous?" } do %>
+                                <i class="fas fa-check"></i>
+                              <% end %>
+                            <% end %>
+                          </div>
+                        </div>
+                        <div class="booking-details">
+                          <div class="booking-date">
+                            <i class='bx bx-calendar'></i>
+                            <%= appointment.date.strftime("%d %b %Y") %>
+                          </div>
+                          <div class="booking-time">
+                            <i class='bx bx-time'></i>
+                            <%= appointment.date.strftime("%H:%M") %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
                 </div>
               </div>
             <% end %>
