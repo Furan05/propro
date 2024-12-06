@@ -10,7 +10,7 @@ class DaddyService < ApplicationRecord
   after_destroy :check_user_pro_status
 
   def average_rating
-    reviews.average(:rating).round(1)
+    reviews.average(:rating).to_f.round(1)
   end
 
   private
